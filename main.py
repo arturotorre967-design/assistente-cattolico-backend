@@ -53,6 +53,42 @@ def classify_tema(question: str):
     return "generale"
 
 # -----------------------------
+# MOTORE SPIRITUALE SUPERVISIONATO
+# -----------------------------
+
+def generate_supervised_answer(question: str):
+    # 1. Classifica il tema
+    tema = classify_tema(question)
+
+    # 2. Recupera i messaggi dal corpus
+    messaggi = get_messages_by_tema(tema)
+
+    # Se non c'è nulla nel corpus, fallback
+    if not messaggi:
+        return {
+            "answer": "Affida il tuo cuore a Dio, Egli ti guida sempre.",
+            "source": "Proverbi 3,5",
+            "explanation": "Anche quando non comprendiamo, Dio è presente.",
+            "category": "Generale"
+        }
+
+    # 3. Prendi il primo messaggio del corpus
+    m = messaggi[0]
+
+    # 4. Costruisci una risposta spirituale armonica
+    answer = m["messaggio"]
+    source = m["fonte"]
+    explanation = m["nota"]
+    category = m["tema"]
+
+    return {
+        "answer": answer,
+        "source": source,
+        "explanation": explanation,
+        "category": category
+    }
+
+# -----------------------------
 # MODELLI
 # -----------------------------
 
@@ -237,3 +273,11 @@ def test_classify(q: str):
         "tema": tema,
         "messaggi": get_messages_by_tema(tema)
     }
+
+# -----------------------------
+# ENDPOINT DI TEST MOTORE SUPERVISIONATO
+# -----------------------------
+
+@app.post("/test-supervised")
+def test_supervised(request: AskRequest):
+    return generate_supervised_answer(request.question)
