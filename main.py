@@ -21,6 +21,38 @@ def get_messages_by_tema(tema: str):
     return risultati
 
 # -----------------------------
+# CLASSIFICATORE DI TEMA
+# -----------------------------
+
+tema_keywords = {
+    "paura": ["paura", "ansia", "angoscia", "timore", "preoccupazione"],
+    "solitudine": ["solo", "solitudine", "abbandonato"],
+    "colpa": ["colpa", "peccato", "sbagliato", "vergogna"],
+    "tristezza": ["triste", "tristezza", "piangere", "lacrime"],
+    "gioia": ["gioia", "felice", "ringraziare"],
+    "amore": ["amore", "amare", "voler bene"],
+    "fedeltà": ["fedeltà", "tradimento", "costanza"],
+    "coraggio": ["coraggio", "forza", "affrontare"],
+    "discernimento": ["discernere", "discernimento", "decisione", "volontà di dio"],
+    "pazienza": ["pazienza", "attendere", "sopportare"],
+    "silenzio": ["silenzio", "tacere", "interiorità"],
+    "speranza": ["speranza", "disperazione", "scoraggiamento"],
+    "prova_sofferenza": ["sofferenza", "dolore", "prova", "croce"],
+    "perdono": ["perdonare", "perdono", "misericordia"],
+    "umiltà": ["umile", "umiltà", "orgoglio"],
+    "gratitudine": ["grazie", "gratitudine", "riconoscenza"],
+    "tentazione": ["tentazione", "tentato", "cadere"],
+    "vocazione": ["vocazione", "chiamata", "volontà di dio"]
+}
+
+def classify_tema(question: str):
+    q = question.lower()
+    for tema, keywords in tema_keywords.items():
+        if any(k in q for k in keywords):
+            return tema
+    return "generale"
+
+# -----------------------------
 # MODELLI
 # -----------------------------
 
@@ -225,4 +257,16 @@ def test_corpus():
     return {
         "corpus_size": len(corpus),
         "first_item": corpus[0] if corpus else None
+    }
+
+# -----------------------------
+# ENDPOINT DI TEST CLASSIFICATORE
+# -----------------------------
+
+@app.get("/test-classify")
+def test_classify(q: str):
+    tema = classify_tema(q)
+    return {
+        "tema": tema,
+        "messaggi": get_messages_by_tema(tema)
     }
