@@ -52,35 +52,10 @@ def classify_tema(question: str):
     return "generale"
 
 # -----------------------------
-# MOTORE SPIRITUALE SUPERVISIONATO (BASE)
+# MOTORE SPIRITUALE SUPERVISIONATO (VERSIONE v4)
 # -----------------------------
 
-def generate_supervised_answer(question: str):
-    tema = classify_tema(question)
-    messaggi = get_messages_by_tema(tema)
-
-    if not messaggi:
-        return {
-            "answer": "Affida il tuo cuore a Dio, Egli ti guida sempre.",
-            "source": "Proverbi 3,5",
-            "explanation": "Anche quando non comprendiamo, Dio è presente.",
-            "category": "Generale"
-        }
-
-    m = messaggi[0]
-
-    return {
-        "answer": m["messaggio"],
-        "source": m["fonte"],
-        "explanation": m["nota"],
-        "category": m["tema"]
-    }
-
-# -----------------------------
-# MOTORE SPIRITUALE SUPERVISIONATO (VERSIONE v3)
-# -----------------------------
-
-def generate_supervised_answer_v3(question: str):
+def generate_supervised_answer_v4(question: str):
     tema = classify_tema(question)
     messaggi = get_messages_by_tema(tema)
 
@@ -96,13 +71,39 @@ def generate_supervised_answer_v3(question: str):
         "tentazione": "Signore, dona forza per resistere e rimanere fedeli."
     }
 
-    # Se non ci sono messaggi nel corpus
+    # -----------------------------
+    # RICONOSCIMENTO INTENSITÀ EMOTIVA
+    # -----------------------------
+    intensita_alta = any(
+        word in question.lower()
+        for word in ["tantissimo", "molto", "troppo", "non ce la faccio", "distrutto", "a pezzi"]
+    )
+
+    # -----------------------------
+    # RICONOSCIMENTO PRIMA PERSONA
+    # -----------------------------
+    prima_persona = any(
+        word in question.lower()
+        for word in ["io", "mi sento", "sto vivendo", "non riesco", "ho paura", "mi sembra"]
+    )
+
+    # -----------------------------
+    # RICONOSCIMENTO DOMANDE DIRETTE
+    # -----------------------------
+    domanda_diretta = any(
+        word in question.lower()
+        for word in ["cosa devo fare", "come faccio", "perché succede", "come andare avanti"]
+    )
+
+    # -----------------------------
+    # SE NON CI SONO MESSAGGI NEL CORPUS
+    # -----------------------------
     if not messaggi:
         risposta = (
             "🌿 **Accoglienza**\n"
-            "Capisco il peso che porti nel cuore. Anche quando tutto sembra incerto, Dio rimane vicino.\n\n"
+            "Capisco il peso che porti nel cuore. Dio rimane vicino anche quando tutto sembra incerto.\n\n"
             "✨ **Illuminazione**\n"
-            "La Sua presenza non viene mai meno, anche nelle notti più buie.\n\n"
+            "La Sua presenza non viene mai meno.\n\n"
             "📖 **Luce della Scrittura**\n"
             "*Proverbi 3,5*\n\n"
             "🕊️ **Benedizione finale**\n"
@@ -117,25 +118,61 @@ def generate_supervised_answer_v3(question: str):
 
     m = messaggi[0]
 
-    # Costruzione risposta strutturata
-    risposta = (
-        "🌿 **Accoglienza**\n"
-        f"Capisco ciò che stai vivendo: nel tuo cuore emerge il tema della **{m['tema']}**.\n\n"
+    # -----------------------------
+    # COSTRUZIONE RISPOSTA STRUTTURATA
+    # -----------------------------
+
+    # Accoglienza dinamica
+    if intensita_alta:
+        accoglienza = (
+            "🌿 **Accoglienza**\n"
+            "Sento quanto questo momento sia pesante per te. Il tuo cuore sta portando un peso grande.\n\n"
+        )
+    elif prima_persona:
+        accoglienza = (
+            "🌿 **Accoglienza**\n"
+            "Capisco ciò che stai vivendo tu personalmente, e non sei solo in questo cammino.\n\n"
+        )
+    else:
+        accoglienza = (
+            "🌿 **Accoglienza**\n"
+            f"Nel tuo cuore emerge il tema della **{m['tema']}**.\n\n"
+        )
+
+    # Illuminazione dal corpus
+    illuminazione = (
         "✨ **Illuminazione dal corpus**\n"
         f"{m['messaggio']} {m['nota']}\n\n"
+    )
+
+    # Luce della Scrittura
+    scrittura = (
         "📖 **Luce della Scrittura**\n"
         f"*{m['fonte']}*\n\n"
     )
 
-    # Preghiera breve solo per temi delicati
+    # Preghiera breve (solo temi delicati)
+    preghiera = ""
     if tema in temi_delicati:
-        risposta += f"🙏 **Preghiera breve**\n{preghiere[tema]}\n\n"
+        preghiera = f"🙏 **Preghiera breve**\n{preghiere[tema]}\n\n"
 
-    risposta += (
+    # Passo concreto (solo se domanda diretta)
+    passo_concreto = ""
+    if domanda_diretta:
+        passo_concreto = (
+            "🌱 **Un passo concreto**\n"
+            "Fai un piccolo gesto di fiducia oggi: dedica un minuto al silenzio e ripeti nel cuore "
+            "una semplice preghiera, come: *“Signore, confido in Te.”*\n\n"
+        )
+
+    # Benedizione finale
+    benedizione = (
         "🕊️ **Benedizione finale**\n"
         "Prenditi un momento di silenzio e porta tutto davanti a Dio. "
         "Egli ascolta sempre chi si affida a Lui. Che la Sua pace illumini il tuo cammino."
     )
+
+    risposta = accoglienza + illuminazione + scrittura + preghiera + passo_concreto + benedizione
 
     return {
         "answer": risposta,
@@ -331,17 +368,9 @@ def test_classify(q: str):
     }
 
 # -----------------------------
-# ENDPOINT DI TEST MOTORE SUPERVISIONATO (BASE)
+# ENDPOINT DI TEST MOTORE SUPERVISIONATO (v4)
 # -----------------------------
 
-@app.post("/test-supervised")
-def test_supervised(request: AskRequest):
-    return generate_supervised_answer(request.question)
-
-# -----------------------------
-# ENDPOINT DI TEST MOTORE SUPERVISIONATO (v3)
-# -----------------------------
-
-@app.post("/test-supervised-v3")
-def test_supervised_v3(request: AskRequest):
-    return generate_supervised_answer_v3(request.question)
+@app.post("/test-supervised-v4")
+def test_supervised_v4(request: AskRequest):
+    return generate_supervised_answer_v4(request.question)
