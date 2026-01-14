@@ -2,8 +2,17 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import json
 import os
+import requests
 
 app = FastAPI()
+
+# -----------------------------
+# CONFIGURAZIONE GROQ
+# -----------------------------
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
+GROQ_MODEL = "llama-3.1-8b-instant"
 
 # -----------------------------
 # CARICAMENTO CORPUS SPIRITUALE
@@ -52,62 +61,49 @@ def classify_tema(question: str):
     return "generale"
 
 # -----------------------------
-# MOTORE SPIRITUALE SUPERVISIONATO (VERSIONE v4)
+# MOTORE SPIRITUALE SUPERVISIONATO (VERSIONE v5)
 # -----------------------------
 
-def generate_supervised_answer_v4(question: str):
+def generate_supervised_answer_v5(question: str):
     tema = classify_tema(question)
     messaggi = get_messages_by_tema(tema)
 
-    # Temi delicati → preghiera breve
     temi_delicati = ["paura", "solitudine", "colpa", "tristezza", "prova_sofferenza", "tentazione"]
 
     preghiere = {
-        "paura": "Signore, dona pace a questo cuore inquieto.",
-        "solitudine": "Signore, fa' sentire la Tua presenza a chi si sente solo.",
-        "colpa": "Signore, dona la grazia del perdono e della pace interiore.",
-        "tristezza": "Signore, asciuga le lacrime e porta consolazione.",
-        "prova_sofferenza": "Signore, sostieni chi porta una croce pesante.",
-        "tentazione": "Signore, dona forza per resistere e rimanere fedeli."
+        "paura": "Signore, posa la Tua mano su questo cuore inquieto e donagli respiro.",
+        "solitudine": "Signore, avvolgi con la Tua presenza chi si sente smarrito e solo.",
+        "colpa": "Signore, riversa la Tua misericordia e sciogli ogni nodo del cuore.",
+        "tristezza": "Signore, asciuga le lacrime e accendi una piccola luce nella notte.",
+        "prova_sofferenza": "Signore, sostieni chi porta una croce pesante e dona forza nel cammino.",
+        "tentazione": "Signore, rafforza questo cuore e guidalo nella fedeltà e nella pace."
     }
 
-    # -----------------------------
-    # RICONOSCIMENTO INTENSITÀ EMOTIVA
-    # -----------------------------
     intensita_alta = any(
         word in question.lower()
         for word in ["tantissimo", "molto", "troppo", "non ce la faccio", "distrutto", "a pezzi"]
     )
 
-    # -----------------------------
-    # RICONOSCIMENTO PRIMA PERSONA
-    # -----------------------------
     prima_persona = any(
         word in question.lower()
         for word in ["io", "mi sento", "sto vivendo", "non riesco", "ho paura", "mi sembra"]
     )
 
-    # -----------------------------
-    # RICONOSCIMENTO DOMANDE DIRETTE
-    # -----------------------------
     domanda_diretta = any(
         word in question.lower()
         for word in ["cosa devo fare", "come faccio", "perché succede", "come andare avanti"]
     )
 
-    # -----------------------------
-    # SE NON CI SONO MESSAGGI NEL CORPUS
-    # -----------------------------
     if not messaggi:
         risposta = (
             "🌿 **Accoglienza**\n"
-            "Capisco il peso che porti nel cuore. Dio rimane vicino anche quando tutto sembra incerto.\n\n"
+            "In questo momento il tuo cuore cerca luce. Respira lentamente: Dio è vicino.\n\n"
             "✨ **Illuminazione**\n"
-            "La Sua presenza non viene mai meno.\n\n"
+            "Anche quando tutto sembra fermo, una piccola scintilla di speranza continua a brillare.\n\n"
             "📖 **Luce della Scrittura**\n"
             "*Proverbi 3,5*\n\n"
             "🕊️ **Benedizione finale**\n"
-            "Che il Signore ti doni pace e coraggio."
+            "Che una pace silenziosa scenda su di te e ti accompagni."
         )
         return {
             "answer": risposta,
@@ -118,58 +114,57 @@ def generate_supervised_answer_v4(question: str):
 
     m = messaggi[0]
 
-    # -----------------------------
-    # COSTRUZIONE RISPOSTA STRUTTURATA
-    # -----------------------------
-
-    # Accoglienza dinamica
     if intensita_alta:
         accoglienza = (
             "🌿 **Accoglienza**\n"
-            "Sento quanto questo momento sia pesante per te. Il tuo cuore sta portando un peso grande.\n\n"
+            "Sento la profondità del tuo dolore. È come una nube pesante che ti avvolge, "
+            "ma anche nelle nubi più scure una luce sottile continua a filtrare.\n\n"
         )
     elif prima_persona:
         accoglienza = (
             "🌿 **Accoglienza**\n"
-            "Capisco ciò che stai vivendo tu personalmente, e non sei solo in questo cammino.\n\n"
+            "Tu stai attraversando un tratto di strada impegnativo. Non sei solo: "
+            "Dio cammina accanto a te, anche quando i passi si fanno incerti.\n\n"
         )
     else:
         accoglienza = (
             "🌿 **Accoglienza**\n"
-            f"Nel tuo cuore emerge il tema della **{m['tema']}**.\n\n"
+            f"Nel tuo cuore affiora il tema della **{m['tema']}**. Fermati un istante, respira, "
+            "lascia che una luce gentile ti raggiunga.\n\n"
         )
 
-    # Illuminazione dal corpus
     illuminazione = (
         "✨ **Illuminazione dal corpus**\n"
-        f"{m['messaggio']} {m['nota']}\n\n"
+        f"{m['messaggio']} {m['nota']}\n"
+        "Lascia che queste parole scendano lentamente nel cuore, come una goccia di pace.\n\n"
     )
 
-    # Luce della Scrittura
     scrittura = (
         "📖 **Luce della Scrittura**\n"
-        f"*{m['fonte']}*\n\n"
+        f"*{m['fonte']}*\n"
+        "La Parola è come un raggio che attraversa la notte e apre un varco di speranza.\n\n"
     )
 
-    # Preghiera breve (solo temi delicati)
     preghiera = ""
     if tema in temi_delicati:
-        preghiera = f"🙏 **Preghiera breve**\n{preghiere[tema]}\n\n"
+        preghiera = (
+            "🙏 **Preghiera breve**\n"
+            f"{preghiere[tema]}\n"
+            "Ripeti queste parole lentamente, come un respiro dell’anima.\n\n"
+        )
 
-    # Passo concreto (solo se domanda diretta)
     passo_concreto = ""
     if domanda_diretta:
         passo_concreto = (
             "🌱 **Un passo concreto**\n"
-            "Fai un piccolo gesto di fiducia oggi: dedica un minuto al silenzio e ripeti nel cuore "
-            "una semplice preghiera, come: *“Signore, confido in Te.”*\n\n"
+            "Oggi prova a fermarti un minuto in silenzio. Metti una mano sul petto, "
+            "chiudi gli occhi e ripeti: *“Signore, guidami Tu.”*\n\n"
         )
 
-    # Benedizione finale
     benedizione = (
         "🕊️ **Benedizione finale**\n"
-        "Prenditi un momento di silenzio e porta tutto davanti a Dio. "
-        "Egli ascolta sempre chi si affida a Lui. Che la Sua pace illumini il tuo cammino."
+        "Che una pace sottile, come un filo di luce, attraversi ciò che stai vivendo. "
+        "Cammina con fiducia: ogni passo, anche il più piccolo, è custodito da Dio."
     )
 
     risposta = accoglienza + illuminazione + scrittura + preghiera + passo_concreto + benedizione
@@ -180,6 +175,96 @@ def generate_supervised_answer_v4(question: str):
         "explanation": m["nota"],
         "category": m["tema"]
     }
+
+# -----------------------------
+# MOTORE AI (FASE B - GROQ + LLAMA 3.1)
+# -----------------------------
+
+def generate_ai_answer(question: str):
+    """
+    Usa la logica della Fase A (tema + corpus + struttura spirituale)
+    e chiede al modello Groq di generare un testo armonico, contemplativo e fedele.
+    """
+    tema = classify_tema(question)
+    messaggi = get_messages_by_tema(tema)
+
+    if not messaggi:
+        # fallback: usa comunque la v5 supervisionata
+        return generate_supervised_answer_v5(question)
+
+    m = messaggi[0]
+
+    # Prompt di sistema: identità e confini dell'assistente
+    system_prompt = (
+        "Sei un assistente spirituale cattolico. "
+        "Parli con tono contemplativo, mite, rispettoso, mai invadente, "
+        "mai psicologico, sempre radicato nella Scrittura e nella Tradizione. "
+        "Non inventi dottrina, non inventi citazioni, non dai consigli morali complessi. "
+        "Non nomini mai il Catechismo o documenti se non vengono già forniti. "
+        "Usa uno stile semplice, luminoso, accogliente."
+    )
+
+    # Prompt di contesto: corpus + struttura
+    context_prompt = f"""
+Utente:
+{question}
+
+Tema principale (classificato): {m['tema']}
+
+Messaggio dal corpus:
+{m['messaggio']}
+
+Nota spirituale/teologica:
+{m['nota']}
+
+Fonte biblica/spirituale:
+{m['fonte']}
+
+Scrivi una risposta che:
+- accolga il vissuto dell'utente con delicatezza
+- riprenda il contenuto del messaggio e della nota
+- faccia riferimento alla fonte in modo semplice (senza tecnicismi)
+- mantenga un tono contemplativo, lento, luminoso
+- resti breve ma denso (8–12 frasi)
+- NON inserisca nuove citazioni o dottrina non presenti sopra
+- NON dia consigli psicologici, ma solo spirituali (fiducia, preghiera, speranza, abbandono in Dio)
+- non usi elenco puntato, ma un unico testo continuo
+
+Non ripetere letteralmente tutto il testo del corpus, ma rielaboralo con delicatezza.
+Non cambiare il senso della nota o della fonte.
+"""
+
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    body = {
+        "model": GROQ_MODEL,
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": context_prompt}
+        ],
+        "temperature": 0.6,
+        "max_tokens": 600
+    }
+
+    try:
+        response = requests.post(GROQ_API_URL, headers=headers, json=body, timeout=20)
+        response.raise_for_status()
+        data = response.json()
+
+        ai_text = data["choices"][0]["message"]["content"].strip()
+
+        return {
+            "answer": ai_text,
+            "source": m["fonte"],
+            "explanation": m["nota"],
+            "category": m["tema"]
+        }
+    except Exception:
+        # in caso di errore con Groq, fallback sicuro al motore v5
+        return generate_supervised_answer_v5(question)
 
 # -----------------------------
 # MODELLI
@@ -195,7 +280,7 @@ class SpiritualAnswer(BaseModel):
     category: str
 
 # -----------------------------
-# REGOLE DI RISPOSTA
+# REGOLE DI RISPOSTA (RAPIDE)
 # -----------------------------
 
 rules = [
@@ -321,7 +406,7 @@ rules = [
 ]
 
 # -----------------------------
-# ENDPOINT PRINCIPALE
+# ENDPOINT PRINCIPALE (REGOLE RAPIDE)
 # -----------------------------
 
 @app.post("/api/ask", response_model=SpiritualAnswer)
@@ -368,9 +453,23 @@ def test_classify(q: str):
     }
 
 # -----------------------------
-# ENDPOINT DI TEST MOTORE SUPERVISIONATO (v4)
+# ENDPOINT DI TEST MOTORE SUPERVISIONATO (v5)
 # -----------------------------
 
-@app.post("/test-supervised-v4")
-def test_supervised_v4(request: AskRequest):
-    return generate_supervised_answer_v4(request.question)
+@app.post("/test-supervised-v5")
+def test_supervised_v5(request: AskRequest):
+    return generate_supervised_answer_v5(request.question)
+
+# -----------------------------
+# ENDPOINT MOTORE AI (FASE B - GROQ)
+# -----------------------------
+
+@app.post("/api/ask-ai", response_model=SpiritualAnswer)
+async def ask_ai(request: AskRequest):
+    result = generate_ai_answer(request.question)
+    return SpiritualAnswer(
+        answer=result["answer"],
+        source=result["source"],
+        explanation=result["explanation"],
+        category=result["category"]
+    )
