@@ -52,7 +52,7 @@ def classify_tema(question: str):
     return "generale"
 
 # -----------------------------
-# MOTORE SPIRITUALE SUPERVISIONATO
+# MOTORE SPIRITUALE SUPERVISIONATO (BASE)
 # -----------------------------
 
 def generate_supervised_answer(question: str):
@@ -71,6 +71,45 @@ def generate_supervised_answer(question: str):
 
     return {
         "answer": m["messaggio"],
+        "source": m["fonte"],
+        "explanation": m["nota"],
+        "category": m["tema"]
+    }
+
+# -----------------------------
+# MOTORE SPIRITUALE SUPERVISIONATO (POTENZIATO - FASE A)
+# -----------------------------
+
+def generate_supervised_answer_v2(question: str):
+    tema = classify_tema(question)
+    messaggi = get_messages_by_tema(tema)
+
+    if not messaggi:
+        risposta = (
+            "Capisco il peso che porti nel cuore. Anche quando tutto sembra incerto, "
+            "Dio rimane vicino e guida i tuoi passi. Affidati a Lui con sincerità: "
+            "la Sua luce non viene mai meno. Che il Signore ti doni pace e coraggio."
+        )
+        return {
+            "answer": risposta,
+            "source": "Proverbi 3,5",
+            "explanation": "La fiducia in Dio sostiene nei momenti di oscurità.",
+            "category": "Generale"
+        }
+
+    m = messaggi[0]
+
+    risposta = (
+        f"Capisco ciò che stai vivendo: il tema che emerge dal tuo cuore è quello della **{m['tema']}**. "
+        f"{m['messaggio']} "
+        f"{m['nota']} "
+        f"La Scrittura ci ricorda questo insegnamento: *{m['fonte']}*. "
+        "Prenditi un momento di silenzio e porta tutto davanti a Dio: Egli ascolta sempre chi si affida a Lui. "
+        "Che la Sua pace illumini il tuo cammino."
+    )
+
+    return {
+        "answer": risposta,
         "source": m["fonte"],
         "explanation": m["nota"],
         "category": m["tema"]
@@ -263,9 +302,17 @@ def test_classify(q: str):
     }
 
 # -----------------------------
-# ENDPOINT DI TEST MOTORE SUPERVISIONATO
+# ENDPOINT DI TEST MOTORE SUPERVISIONATO (BASE)
 # -----------------------------
 
 @app.post("/test-supervised")
 def test_supervised(request: AskRequest):
     return generate_supervised_answer(request.question)
+
+# -----------------------------
+# ENDPOINT DI TEST MOTORE SUPERVISIONATO (POTENZIATO)
+# -----------------------------
+
+@app.post("/test-supervised-v2")
+def test_supervised_v2(request: AskRequest):
+    return generate_supervised_answer_v2(request.question)
