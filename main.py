@@ -77,12 +77,24 @@ def generate_supervised_answer(question: str):
     }
 
 # -----------------------------
-# MOTORE SPIRITUALE SUPERVISIONATO (POTENZIATO - FASE A)
+# MOTORE SPIRITUALE SUPERVISIONATO (POTENZIATO - OPZIONE B)
 # -----------------------------
 
 def generate_supervised_answer_v2(question: str):
     tema = classify_tema(question)
     messaggi = get_messages_by_tema(tema)
+
+    # Temi delicati → aggiungiamo una preghiera breve
+    temi_delicati = ["paura", "solitudine", "colpa", "tristezza", "prova_sofferenza", "tentazione"]
+
+    preghiere = {
+        "paura": "Signore, dona pace a questo cuore inquieto.",
+        "solitudine": "Signore, fa' sentire la Tua presenza a chi si sente solo.",
+        "colpa": "Signore, dona la grazia del perdono e della pace interiore.",
+        "tristezza": "Signore, asciuga le lacrime e porta consolazione.",
+        "prova_sofferenza": "Signore, sostieni chi porta una croce pesante.",
+        "tentazione": "Signore, dona forza per resistere e rimanere fedeli."
+    }
 
     if not messaggi:
         risposta = (
@@ -104,6 +116,13 @@ def generate_supervised_answer_v2(question: str):
         f"{m['messaggio']} "
         f"{m['nota']} "
         f"La Scrittura ci ricorda questo insegnamento: *{m['fonte']}*. "
+    )
+
+    # Aggiungiamo la preghiera solo se il tema è delicato
+    if tema in temi_delicati:
+        risposta += f" {preghiere[tema]} "
+
+    risposta += (
         "Prenditi un momento di silenzio e porta tutto davanti a Dio: Egli ascolta sempre chi si affida a Lui. "
         "Che la Sua pace illumini il tuo cammino."
     )
