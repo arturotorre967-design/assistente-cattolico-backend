@@ -17,8 +17,7 @@ def load_corpus():
 corpus = load_corpus()
 
 def get_messages_by_tema(tema: str):
-    risultati = [item for item in corpus if item["tema"] == tema]
-    return risultati
+    return [item for item in corpus if item["tema"] == tema]
 
 # -----------------------------
 # CLASSIFICATORE DI TEMA
@@ -57,13 +56,9 @@ def classify_tema(question: str):
 # -----------------------------
 
 def generate_supervised_answer(question: str):
-    # 1. Classifica il tema
     tema = classify_tema(question)
-
-    # 2. Recupera i messaggi dal corpus
     messaggi = get_messages_by_tema(tema)
 
-    # Se non c'è nulla nel corpus, fallback
     if not messaggi:
         return {
             "answer": "Affida il tuo cuore a Dio, Egli ti guida sempre.",
@@ -72,20 +67,13 @@ def generate_supervised_answer(question: str):
             "category": "Generale"
         }
 
-    # 3. Prendi il primo messaggio del corpus
     m = messaggi[0]
 
-    # 4. Costruisci una risposta spirituale armonica
-    answer = m["messaggio"]
-    source = m["fonte"]
-    explanation = m["nota"]
-    category = m["tema"]
-
     return {
-        "answer": answer,
-        "source": source,
-        "explanation": explanation,
-        "category": category
+        "answer": m["messaggio"],
+        "source": m["fonte"],
+        "explanation": m["nota"],
+        "category": m["tema"]
     }
 
 # -----------------------------
