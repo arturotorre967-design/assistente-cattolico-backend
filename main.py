@@ -70,7 +70,6 @@ class SpiritualAnswer(BaseModel):
 # -----------------------------
 
 rules = [
-    # DOTTRINA / DIVINAZIONE
     {
         "keywords": ["tarocchi", "oroscopo", "magia", "cartomanzia", "medium", "divinazione"],
         "answer": "La Chiesa invita a evitare ogni forma di divinazione.",
@@ -78,8 +77,6 @@ rules = [
         "explanation": "La divinazione contraddice l'affidamento fiducioso a Dio.",
         "category": "Dottrina"
     },
-
-    # SOFFERENZA
     {
         "keywords": ["sofferenza", "dolore", "malattia", "croce", "patire"],
         "answer": "Unisci la tua sofferenza a quella di Cristo.",
@@ -87,8 +84,6 @@ rules = [
         "explanation": "La sofferenza, vissuta con Cristo, diventa partecipazione alla sua opera redentrice.",
         "category": "Sofferenza e Croce"
     },
-
-    # PAURA / ANSIA
     {
         "keywords": ["paura", "ansia", "angoscia", "preoccupazione", "timore"],
         "answer": "Non temere, Dio è con te.",
@@ -96,8 +91,6 @@ rules = [
         "explanation": "La presenza di Dio dona forza e pace nei momenti difficili.",
         "category": "Consolazione"
     },
-
-    # PERDONO / PECCATO
     {
         "keywords": ["perdono", "colpa", "peccato", "confessione", "misericordia"],
         "answer": "Dio è misericordioso e sempre pronto a perdonare.",
@@ -105,8 +98,6 @@ rules = [
         "explanation": "Come il Padre del figliol prodigo, Dio accoglie chi torna a Lui.",
         "category": "Misericordia"
     },
-
-    # VOCAZIONE / DISCERNIMENTO
     {
         "keywords": ["vocazione", "chiamata", "discernimento", "volontà di dio"],
         "answer": "Ascolta la voce di Dio nel silenzio e nella preghiera.",
@@ -114,8 +105,6 @@ rules = [
         "explanation": "Il discernimento nasce dall'ascolto profondo della volontà di Dio.",
         "category": "Discernimento"
     },
-
-    # SPERANZA
     {
         "keywords": ["speranza", "fiducia", "scoraggiamento", "disperazione"],
         "answer": "La speranza cristiana non delude.",
@@ -123,8 +112,6 @@ rules = [
         "explanation": "Lo Spirito Santo infonde nei cuori la speranza che sostiene nelle prove.",
         "category": "Speranza"
     },
-
-    # PREGHIERA
     {
         "keywords": ["preghiera", "pregare", "rosario", "adorazione"],
         "answer": "La preghiera è respiro dell'anima.",
@@ -132,8 +119,6 @@ rules = [
         "explanation": "La preghiera è l'umile incontro tra la sete di Dio e la sete dell'uomo.",
         "category": "Preghiera"
     },
-
-    # CARITÀ / AMORE
     {
         "keywords": ["amore", "carità", "prossimo", "aiutare"],
         "answer": "Ama il prossimo tuo come te stesso.",
@@ -141,8 +126,6 @@ rules = [
         "explanation": "La carità è il cuore della vita cristiana.",
         "category": "Carità"
     },
-
-    # FEDE / DUBBI
     {
         "keywords": ["fede", "credere", "dubbio", "incredulità"],
         "answer": "La fede cresce chiedendola a Dio.",
@@ -150,8 +133,6 @@ rules = [
         "explanation": "Anche chi dubita può dire: 'Credo, aiutami nella mia incredulità'.",
         "category": "Fede"
     },
-
-    # SPIRITO SANTO
     {
         "keywords": ["spirito santo", "consolatore", "dono", "carismi"],
         "answer": "Lo Spirito Santo ti guida nella verità.",
@@ -159,8 +140,6 @@ rules = [
         "explanation": "È lo Spirito che illumina il cuore e dona pace.",
         "category": "Spirito Santo"
     },
-
-    # RELAZIONI / FAMIGLIA
     {
         "keywords": ["matrimonio", "famiglia", "relazione", "fidanzamento", "conflitto"],
         "answer": "L’amore vero è paziente e misericordioso.",
@@ -168,8 +147,6 @@ rules = [
         "explanation": "La carità è il fondamento di ogni relazione cristiana.",
         "category": "Relazioni"
     },
-
-    # LOTTA SPIRITUALE
     {
         "keywords": ["tentazione", "peccato", "demonio", "lotta", "caduta"],
         "answer": "Dio ti dà la forza per resistere alla tentazione.",
@@ -177,8 +154,6 @@ rules = [
         "explanation": "Nessuna prova supera le tue forze se ti affidi a Dio.",
         "category": "Lotta spirituale"
     },
-
-    # CRESCITA SPIRITUALE
     {
         "keywords": ["crescita", "migliorare", "conversione", "cammino", "santità"],
         "answer": "La santità cresce un passo alla volta.",
@@ -186,8 +161,6 @@ rules = [
         "explanation": "Dio ti guida nel cammino quotidiano verso la santità.",
         "category": "Crescita spirituale"
     },
-
-    # PACE E GIUSTIZIA
     {
         "keywords": ["guerra", "pace", "ingiustizia", "violenza", "male"],
         "answer": "Beati gli operatori di pace.",
@@ -195,8 +168,6 @@ rules = [
         "explanation": "La pace nasce da cuori riconciliati con Dio.",
         "category": "Pace e Giustizia"
     },
-
-    # MARIA E I SANTI
     {
         "keywords": ["maria", "madonna", "santi", "intercessione"],
         "answer": "Maria ti accompagna come Madre.",
@@ -204,8 +175,6 @@ rules = [
         "explanation": "La devozione mariana conduce sempre a Cristo.",
         "category": "Devozione"
     },
-
-    # SACRAMENTI
     {
         "keywords": ["sacramenti", "eucaristia", "comunione", "battesimo"],
         "answer": "I sacramenti sono incontri reali con Cristo.",
@@ -213,8 +182,6 @@ rules = [
         "explanation": "Attraverso i sacramenti, Cristo agisce nella tua vita.",
         "category": "Sacramenti"
     },
-
-    # SENSO DELLA VITA
     {
         "keywords": ["senso", "scopo", "vita", "esistenza", "vuoto"],
         "answer": "La tua vita ha un valore infinito agli occhi di Dio.",
