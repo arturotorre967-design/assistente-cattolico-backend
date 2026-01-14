@@ -1,7 +1,24 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+import json
+import os
 
 app = FastAPI()
+
+# -----------------------------
+# CARICAMENTO CORPUS SPIRITUALE
+# -----------------------------
+
+def load_corpus():
+    corpus_path = os.path.join(os.path.dirname(__file__), "corpus.json")
+    with open(corpus_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+corpus = load_corpus()
+
+def get_messages_by_tema(tema: str):
+    risultati = [item for item in corpus if item["tema"] == tema]
+    return risultati
 
 # -----------------------------
 # MODELLI
@@ -198,3 +215,14 @@ async def ask_question(request: AskRequest):
         explanation="Dio guida chi si affida a Lui.",
         category="Generale"
     )
+
+# -----------------------------
+# ENDPOINT DI TEST CORPUS
+# -----------------------------
+
+@app.get("/test-corpus")
+def test_corpus():
+    return {
+        "corpus_size": len(corpus),
+        "first_item": corpus[0] if corpus else None
+    }
