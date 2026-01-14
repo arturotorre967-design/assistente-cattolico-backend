@@ -77,14 +77,14 @@ def generate_supervised_answer(question: str):
     }
 
 # -----------------------------
-# MOTORE SPIRITUALE SUPERVISIONATO (POTENZIATO - OPZIONE B)
+# MOTORE SPIRITUALE SUPERVISIONATO (VERSIONE v3)
 # -----------------------------
 
-def generate_supervised_answer_v2(question: str):
+def generate_supervised_answer_v3(question: str):
     tema = classify_tema(question)
     messaggi = get_messages_by_tema(tema)
 
-    # Temi delicati → aggiungiamo una preghiera breve
+    # Temi delicati → preghiera breve
     temi_delicati = ["paura", "solitudine", "colpa", "tristezza", "prova_sofferenza", "tentazione"]
 
     preghiere = {
@@ -96,11 +96,17 @@ def generate_supervised_answer_v2(question: str):
         "tentazione": "Signore, dona forza per resistere e rimanere fedeli."
     }
 
+    # Se non ci sono messaggi nel corpus
     if not messaggi:
         risposta = (
-            "Capisco il peso che porti nel cuore. Anche quando tutto sembra incerto, "
-            "Dio rimane vicino e guida i tuoi passi. Affidati a Lui con sincerità: "
-            "la Sua luce non viene mai meno. Che il Signore ti doni pace e coraggio."
+            "🌿 **Accoglienza**\n"
+            "Capisco il peso che porti nel cuore. Anche quando tutto sembra incerto, Dio rimane vicino.\n\n"
+            "✨ **Illuminazione**\n"
+            "La Sua presenza non viene mai meno, anche nelle notti più buie.\n\n"
+            "📖 **Luce della Scrittura**\n"
+            "*Proverbi 3,5*\n\n"
+            "🕊️ **Benedizione finale**\n"
+            "Che il Signore ti doni pace e coraggio."
         )
         return {
             "answer": risposta,
@@ -111,20 +117,24 @@ def generate_supervised_answer_v2(question: str):
 
     m = messaggi[0]
 
+    # Costruzione risposta strutturata
     risposta = (
-        f"Capisco ciò che stai vivendo: il tema che emerge dal tuo cuore è quello della **{m['tema']}**. "
-        f"{m['messaggio']} "
-        f"{m['nota']} "
-        f"La Scrittura ci ricorda questo insegnamento: *{m['fonte']}*. "
+        "🌿 **Accoglienza**\n"
+        f"Capisco ciò che stai vivendo: nel tuo cuore emerge il tema della **{m['tema']}**.\n\n"
+        "✨ **Illuminazione dal corpus**\n"
+        f"{m['messaggio']} {m['nota']}\n\n"
+        "📖 **Luce della Scrittura**\n"
+        f"*{m['fonte']}*\n\n"
     )
 
-    # Aggiungiamo la preghiera solo se il tema è delicato
+    # Preghiera breve solo per temi delicati
     if tema in temi_delicati:
-        risposta += f" {preghiere[tema]} "
+        risposta += f"🙏 **Preghiera breve**\n{preghiere[tema]}\n\n"
 
     risposta += (
-        "Prenditi un momento di silenzio e porta tutto davanti a Dio: Egli ascolta sempre chi si affida a Lui. "
-        "Che la Sua pace illumini il tuo cammino."
+        "🕊️ **Benedizione finale**\n"
+        "Prenditi un momento di silenzio e porta tutto davanti a Dio. "
+        "Egli ascolta sempre chi si affida a Lui. Che la Sua pace illumini il tuo cammino."
     )
 
     return {
@@ -329,9 +339,9 @@ def test_supervised(request: AskRequest):
     return generate_supervised_answer(request.question)
 
 # -----------------------------
-# ENDPOINT DI TEST MOTORE SUPERVISIONATO (POTENZIATO)
+# ENDPOINT DI TEST MOTORE SUPERVISIONATO (v3)
 # -----------------------------
 
-@app.post("/test-supervised-v2")
-def test_supervised_v2(request: AskRequest):
-    return generate_supervised_answer_v2(request.question)
+@app.post("/test-supervised-v3")
+def test_supervised_v3(request: AskRequest):
+    return generate_supervised_answer_v3(request.question)
