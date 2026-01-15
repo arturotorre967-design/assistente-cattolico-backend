@@ -169,6 +169,39 @@ def generate_supervised_answer_v5(question: str):
         "explanation": m["nota"],
         "category": m["tema"]
     }
+    
+# -----------------------------
+# QUALITY FILTER (Controllo qualità AI)
+# -----------------------------
+
+def quality_filter(text: str, fonte: str):
+    # 1. Rimuove citazioni inventate
+    if any(book in text for book in ["Isaia", "Salmo", "Giovanni", "Marco", "Luca", "Corinzi"]):
+        if fonte not in text:
+            # Se l'AI ha inventato una citazione, la rimuoviamo
+            text = text.split(".")[0] + ". Dio è vicino."
+
+    # 2. Accorcia risposte troppo lunghe
+    if len(text) > 900:
+        text = text[:900].rsplit(".", 1)[0] + "."
+
+    # 3. Rimuove toni psicologici
+    psicologia = ["ansia", "trauma", "terapia", "psicologico", "stress", "depressione"]
+    for p in psicologia:
+        if p in text.lower():
+            text = text.replace(p, "fatica interiore")
+
+    # 4. Armonizza il tono
+    sostituzioni = {
+        "Dio ti aiuta": "Dio ti accompagna",
+        "Dio ti sostiene": "Dio posa la Sua mano sul tuo cammino",
+        "non sei solo": "non sei mai abbandonato",
+        "paura": "timore che cerca luce"
+    }
+    for k, v in sostituzioni.items():
+        text = text.replace(k, v)
+
+    return text
 
 # -----------------------------
 # MOTORE AI (FASE B - GROQ + LLAMA 3.1)
@@ -183,13 +216,19 @@ def generate_ai_answer(question: str):
 
     m = messaggi[0]
 
+    # Nuovo system prompt contemplativo
     system_prompt = (
         "Sei un assistente spirituale cattolico. "
-        "Parli con tono contemplativo, mite, rispettoso, mai invadente, "
-        "mai psicologico, sempre radicato nella Scrittura e nella Tradizione. "
-        "Non inventi dottrina, non inventi citazioni, non dai consigli morali complessi. "
-        "Non nomini mai il Catechismo o documenti se non vengono già forniti. "
-        "Usa uno stile semplice, luminoso, accogliente."
+        "Parli con tono contemplativo, lento, mite, luminoso, come chi accompagna un’anima nel silenzio. "
+        "Non fai psicologia, non analizzi emozioni, non dai consigli tecnici o terapeutici. "
+        "Non inventi dottrina, non aggiungi citazioni non fornite, non introduci nuovi testi biblici. "
+        "Usi solo la fonte e la nota che ti vengono date. "
+        "La tua risposta è breve, essenziale, come un soffio di luce: 8–12 frasi, senza elenchi. "
+        "Evita moralismi, ammonizioni, giudizi, spiegazioni complesse. "
+        "Parla come un fratello che siede accanto, non come un professore. "
+        "Usa immagini semplici: luce, silenzio, respiro, cammino, mano di Dio. "
+        "Ogni frase deve portare pace, non informazioni. "
+        "Non ripetere il contenuto del corpus parola per parola: rielaboralo con delicatezza."
     )
 
     context_prompt = f"""
@@ -240,12 +279,16 @@ Scrivi una risposta che:
 
         ai_text = data["choices"][0]["message"]["content"].strip()
 
+        # Applica il quality filter
+        ai_text = quality_filter(ai_text, m["fonte"])
+
         return {
             "answer": ai_text,
             "source": m["fonte"],
             "explanation": m["nota"],
             "category": m["tema"]
         }
+
     except Exception:
         return generate_supervised_answer_v5(question)
 
