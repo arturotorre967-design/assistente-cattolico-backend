@@ -289,8 +289,9 @@ Scrivi una risposta che:
             "category": m["tema"]
         }
 
-    except Exception:
-        return generate_supervised_answer_v5(question)
+    except Exception as e:
+    print("ERRORE GROQ:", e)
+    return generate_supervised_answer_v5(question)
 
 # -----------------------------
 # MODELLI
