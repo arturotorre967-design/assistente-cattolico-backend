@@ -400,4 +400,59 @@ async def ask_question(request: AskRequest):
         if any(keyword in question for keyword in rule["keywords"]):
             return SpiritualAnswer(
                 answer=rule["answer"],
-                source
+                source=rule["source"],
+                explanation=rule["explanation"],
+                category=rule["category"]
+            )
+
+    return SpiritualAnswer(
+        answer="Cerca prima il Regno di Dio.",
+        source="Matteo 6,33",
+        explanation="Dio guida chi si affida a Lui.",
+        category="Generale"
+    )
+
+# -----------------------------
+# ENDPOINT DI TEST CORPUS
+# -----------------------------
+
+@app.get("/test-corpus")
+def test_corpus():
+    return {
+        "corpus_size": len(corpus),
+        "first_item": corpus[0] if corpus else None
+    }
+
+# -----------------------------
+# ENDPOINT DI TEST CLASSIFICATORE
+# -----------------------------
+
+@app.get("/test-classify")
+def test_classify(q: str):
+    tema = classify_tema(q)
+    return {
+        "tema": tema,
+        "messaggi": get_messages_by_tema(tema)
+    }
+
+# -----------------------------
+# ENDPOINT DI TEST MOTORE SUPERVISIONATO (v5)
+# -----------------------------
+
+@app.post("/test-supervised-v5")
+def test_supervised_v5(request: AskRequest):
+    return generate_supervised_answer_v5(request.question)
+
+# -----------------------------
+# ENDPOINT MOTORE AI (FASE B - GROQ)
+# -----------------------------
+
+@app.post("/api/ask-ai", response_model=SpiritualAnswer)
+async def ask_ai(request: AskRequest):
+    result = generate_ai_answer(request.question)
+    return SpiritualAnswer(
+        answer=result["answer"],
+        source=result["source"],
+        explanation=result["explanation"],
+        category=result["category"]
+    )
