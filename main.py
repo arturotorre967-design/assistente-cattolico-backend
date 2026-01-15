@@ -290,8 +290,8 @@ Scrivi una risposta che:
         }
 
     except Exception as e:
-    print("ERRORE GROQ:", e)
-    return generate_supervised_answer_v5(question)
+        print("ERRORE GROQ:", e)
+        return generate_supervised_answer_v5(question)
 
 # -----------------------------
 # MODELLI
