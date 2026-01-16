@@ -274,6 +274,8 @@ Scrivi una risposta che:
 
     try:
         response = requests.post(GROQ_API_URL, headers=headers, json=body, timeout=20)
+        print("STATUS CODE:", response.status_code)
+        print("RAW RESPONSE:", response.text)
         response.raise_for_status()
         data = response.json()
 
