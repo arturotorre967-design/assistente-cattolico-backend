@@ -216,7 +216,6 @@ def generate_ai_answer(question: str):
 
     m = messaggi[0]
 
-    # Nuovo system prompt contemplativo
     system_prompt = (
         "Sei un assistente spirituale cattolico. "
         "Parli con tono contemplativo, lento, mite, luminoso, come chi accompagna un’anima nel silenzio. "
@@ -257,11 +256,11 @@ Scrivi una risposta che:
 - non usi elenco puntato, ma un unico testo continuo
 """
 
-headers = {
-    "X-API-Key": GROQ_API_KEY,
-    "Content-Type": "application/json",
-    "Accept": "application/json"
-}
+    headers = {
+        "X-API-Key": GROQ_API_KEY,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
 
     body = {
         "model": GROQ_MODEL,
@@ -279,7 +278,6 @@ headers = {
         data = response.json()
 
         ai_text = data["choices"][0]["message"]["content"].strip()
-
         ai_text = quality_filter(ai_text, m["fonte"])
 
         return {
