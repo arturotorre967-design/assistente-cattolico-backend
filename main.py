@@ -231,7 +231,7 @@ def generate_ai_answer(question: str):
         "Non ripetere il contenuto del corpus parola per parola: rielaboralo con delicatezza."
     )
 
-context_prompt = f"L'utente dice: {question}. Rispondi in modo spirituale e contemplativo."
+    context_prompt = f"""
 Utente:
 {question}
 
