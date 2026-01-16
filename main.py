@@ -19,7 +19,7 @@ def test_key():
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
-GROQ_MODEL = "llama3-8b-8192"
+GROQ_MODEL = "mixtral-8x7b-32768"
 
 # -----------------------------
 # CARICAMENTO CORPUS SPIRITUALE
@@ -231,7 +231,7 @@ def generate_ai_answer(question: str):
         "Non ripetere il contenuto del corpus parola per parola: rielaboralo con delicatezza."
     )
 
-    context_prompt = f"""
+context_prompt = f"L'utente dice: {question}. Rispondi in modo spirituale e contemplativo."
 Utente:
 {question}
 
@@ -257,10 +257,11 @@ Scrivi una risposta che:
 - non usi elenco puntato, ma un unico testo continuo
 """
 
-    headers = {
-        "X-API-Key": GROQ_API_KEY,
-        "Content-Type": "application/json"
-    }
+headers = {
+    "X-API-Key": GROQ_API_KEY,
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+}
 
     body = {
         "model": GROQ_MODEL,
