@@ -262,15 +262,15 @@ headers = {
     "Content-Type": "application/json"
 }
 
-    body = {
-        "model": GROQ_MODEL,
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": context_prompt}
-        ],
-        "temperature": 0.6,
-        "max_tokens": 600
-    }
+        body = {
+            "model": GROQ_MODEL,
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": context_prompt}
+            ],
+            "temperature": 0.6,
+            "max_tokens": 600
+        }
 
     try:
         response = requests.post(GROQ_API_URL, headers=headers, json=body, timeout=20)
