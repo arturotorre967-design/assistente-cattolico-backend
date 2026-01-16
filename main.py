@@ -257,10 +257,10 @@ Scrivi una risposta che:
 - non usi elenco puntato, ma un unico testo continuo
 """
 
-    headers = {
-        "Authorization": f"Bearer {GROQ_API_KEY}",
-        "Content-Type": "application/json"
-    }
+headers = {
+    "X-API-Key": GROQ_API_KEY,
+    "Content-Type": "application/json"
+}
 
     body = {
         "model": GROQ_MODEL,
