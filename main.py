@@ -431,7 +431,6 @@ rules = [
         "category": "Senso della vita"
     }
 ]
-
 # -----------------------------
 # ENDPOINT PRINCIPALE (REGOLE RAPIDE)
 # -----------------------------
