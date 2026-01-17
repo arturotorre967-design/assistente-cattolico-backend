@@ -31,6 +31,7 @@ def load_corpus():
         return json.load(f)
 
 corpus = load_corpus()
+print("🔥 CORPUS CARICATO:", corpus)
 
 def get_messages_by_tema(tema: str):
     return [item for item in corpus if item["tema"] == tema]
