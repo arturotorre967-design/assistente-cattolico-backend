@@ -211,8 +211,14 @@ def generate_ai_answer(question: str):
     tema = classify_tema(question)
     messaggi = get_messages_by_tema(tema)
 
+    print("TEMA CLASSIFICATO:", tema)
+    print("MESSAGGI TROVATI:", messaggi)
+
     if not messaggi:
+        print("NESSUN MESSAGGIO TROVATO — ENTRA NEL FALLBACK")
         return generate_supervised_answer_v5(question)
+
+    # ... resto della funzione ...
 
     m = messaggi[0]
 
