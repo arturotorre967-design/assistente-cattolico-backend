@@ -263,42 +263,41 @@ Scrivi una risposta che:
 - non usi elenco puntato, ma un unico testo continuo
 """
 
-    headers = {
-        "X-API-Key": GROQ_API_KEY,
-        "Content-Type": "application/json",
-        "Accept": "application/json"
+headers = {
+    "Authorization": f"Bearer {GROQ_API_KEY}",
+    "Content-Type": "application/json"
+}
+
+body = {
+    "model": GROQ_MODEL,
+    "messages": [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": context_prompt}
+    ],
+    "temperature": 0.6,
+    "max_tokens": 600
+}
+
+try:
+    response = requests.post(GROQ_API_URL, headers=headers, json=body, timeout=20)
+    print("STATUS CODE:", response.status_code)
+    print("RAW RESPONSE:", response.text)
+    response.raise_for_status()
+    data = response.json()
+
+    ai_text = data["choices"][0]["message"]["content"].strip()
+    ai_text = quality_filter(ai_text, m["fonte"])
+
+    return {
+        "answer": ai_text,
+        "source": m["fonte"],
+        "explanation": m["nota"],
+        "category": m["tema"]
     }
 
-    body = {
-        "model": GROQ_MODEL,
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": context_prompt}
-        ],
-        "temperature": 0.6,
-        "max_tokens": 600
-    }
-
-    try:
-        response = requests.post(GROQ_API_URL, headers=headers, json=body, timeout=20)
-        print("STATUS CODE:", response.status_code)
-        print("RAW RESPONSE:", response.text)
-        response.raise_for_status()
-        data = response.json()
-
-        ai_text = data["choices"][0]["message"]["content"].strip()
-        ai_text = quality_filter(ai_text, m["fonte"])
-
-        return {
-            "answer": ai_text,
-            "source": m["fonte"],
-            "explanation": m["nota"],
-            "category": m["tema"]
-        }
-
-    except Exception as e:
-        print("ERRORE GROQ:", e)
-        return generate_supervised_answer_v5(question)
+except Exception as e:
+    print("ERRORE GROQ:", e)
+    return generate_supervised_answer_v5(question)
 
 # -----------------------------
 # MODELLI
