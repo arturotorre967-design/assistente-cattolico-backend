@@ -223,22 +223,22 @@ def generate_ai_answer(question: str):
 
     m = messaggi[0]
 
-system_prompt = (
-    "Sei un assistente spirituale cattolico. "
-    "Parli con tono contemplativo, lento, mite, luminoso, come chi accompagna un’anima nel silenzio. "
-    "Non fai psicologia, non analizzi emozioni, non dai consigli tecnici o terapeutici. "
-    "Non inventi dottrina, non aggiungi citazioni non fornite, non introduci nuovi testi biblici. "
-    "Usi solo il messaggio, la nota e la fonte che ti vengono dati. "
-    "La tua risposta deve essere una rielaborazione poetica e contemplativa del messaggio, della nota e della fonte, "
-    "senza aggiungere contenuti nuovi né introdurre idee non presenti. "
-    "Ogni frase deve essere breve, essenziale, come un soffio di luce. "
-    "Evita moralismi, ammonizioni, giudizi, spiegazioni complesse. "
-    "Parla come un fratello che siede accanto, non come un professore. "
-    "Usa immagini semplici: luce, silenzio, respiro, cammino, mano di Dio. "
-    "Ogni frase deve portare pace, non informazioni. "
-    "Non ripetere il corpus parola per parola: rielaboralo con delicatezza. "
-    "Scrivi 8–12 frasi, senza elenchi, senza sezioni, senza emoji."
-)
+    system_prompt = (
+        "Sei un assistente spirituale cattolico. "
+        "Parli con tono contemplativo, lento, mite, luminoso, come chi accompagna un’anima nel silenzio. "
+        "Non fai psicologia, non analizzi emozioni, non dai consigli tecnici o terapeutici. "
+        "Non inventi dottrina, non aggiungi citazioni non fornite, non introduci nuovi testi biblici. "
+        "Usi solo il messaggio, la nota e la fonte che ti vengono dati. "
+        "La tua risposta deve essere una rielaborazione poetica e contemplativa del messaggio, della nota e della fonte, "
+        "senza aggiungere contenuti nuovi né introdurre idee non presenti. "
+        "Ogni frase deve essere breve, essenziale, come un soffio di luce. "
+        "Evita moralismi, ammonizioni, giudizi, spiegazioni complesse. "
+        "Parla come un fratello che siede accanto, non come un professore. "
+        "Usa immagini semplici: luce, silenzio, respiro, cammino, mano di Dio. "
+        "Ogni frase deve portare pace, non informazioni. "
+        "Non ripetere il corpus parola per parola: rielaboralo con delicatezza. "
+        "Scrivi 8–12 frasi, senza elenchi, senza sezioni, senza emoji."
+    )
 
     context_prompt = f"""
 Utente:
@@ -266,41 +266,41 @@ Scrivi una risposta che:
 - non usi elenco puntato, ma un unico testo continuo
 """
 
-headers = {
-    "Authorization": f"Bearer {GROQ_API_KEY}",
-    "Content-Type": "application/json"
-}
-
-body = {
-    "model": GROQ_MODEL,
-    "messages": [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": context_prompt}
-    ],
-    "temperature": 0.6,
-    "max_tokens": 600
-}
-
-try:
-    response = requests.post(GROQ_API_URL, headers=headers, json=body, timeout=20)
-    print("STATUS CODE:", response.status_code)
-    print("RAW RESPONSE:", response.text)
-    response.raise_for_status()
-    data = response.json()
-
-    ai_text = data["choices"][0]["message"]["content"].strip()
-    ai_text = quality_filter(ai_text, m["fonte"])
-
-    return {
-        "answer": ai_text,
-        "source": m["fonte"],
-        "explanation": m["nota"],
-        "category": m["tema"]
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json"
     }
 
-except Exception as e:
-    print("ERRORE GROQ:", e)
-    return generate_supervised_answer_v5(question)
+    body = {
+        "model": GROQ_MODEL,
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": context_prompt}
+        ],
+        "temperature": 0.6,
+        "max_tokens": 600
+    }
+
+    try:
+        response = requests.post(GROQ_API_URL, headers=headers, json=body, timeout=20)
+        print("STATUS CODE:", response.status_code)
+        print("RAW RESPONSE:", response.text)
+        response.raise_for_status()
+        data = response.json()
+
+        ai_text = data["choices"][0]["message"]["content"].strip()
+        ai_text = quality_filter(ai_text, m["fonte"])
+
+        return {
+            "answer": ai_text,
+            "source": m["fonte"],
+            "explanation": m["nota"],
+            "category": m["tema"]
+        }
+
+    except Exception as e:
+        print("ERRORE GROQ:", e)
+        return generate_supervised_answer_v5(question)
 
 # -----------------------------
 # MODELLI
