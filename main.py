@@ -1,10 +1,31 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from typing import Optional
 import json
 import os
 import requests
 
+# -----------------------------
+# CARICAMENTO .env  (AGGIUNTO)
+# -----------------------------
+from dotenv import load_dotenv
+load_dotenv()  # <-- Questa riga carica il file .env
+
 app = FastAPI()
+
+# -----------------------------
+# MODELLI Pydantic (NUOVI)
+# -----------------------------
+
+class RispostaRequest(BaseModel):
+    domanda: str
+
+class RispostaFinale(BaseModel):
+    risposta: str
+    tema: str
+    messaggio: str
+    fonte: Optional[str] = None
+    nota: Optional[str] = None
 
 # -----------------------------
 # TEST LETTURA CHIAVE GROQ
@@ -19,7 +40,7 @@ def test_key():
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
-GROQ_MODEL = "mixtral-8x7b-32768"
+GROQ_MODEL = "llama-3.3-70b-versatile"
 
 # -----------------------------
 # CARICAMENTO CORPUS SPIRITUALE
@@ -67,6 +88,455 @@ def classify_tema(question: str):
         if any(k in q for k in keywords):
             return tema
     return "generale"
+
+# -----------------------------
+# LITURGIA DEL GIORNO (MODULO)
+# -----------------------------
+
+liturgia = {
+    "domenica": {
+        "lettura": "Dal Vangelo secondo Marco (1,14-20)",
+        "tema": "Chiamata, sequela, fiducia",
+        "versetto_chiave": "«Venite dietro a me, vi farò diventare pescatori di uomini»"
+    },
+    "lunedi": {
+        "lettura": "Dal Vangelo secondo Matteo (5,1-12)",
+        "tema": "Beatitudini, speranza, consolazione",
+        "versetto_chiave": "«Beati i poveri in spirito»"
+    },
+    "martedi": {
+        "lettura": "Dal Vangelo secondo Marco (2,23-28)",
+        "tema": "Libertà, misericordia, legge",
+        "versetto_chiave": "«Il sabato è stato fatto per l’uomo»"
+    },
+    "mercoledi": {
+        "lettura": "Dal Vangelo secondo Luca (11,1-4)",
+        "tema": "Preghiera, fiducia, intimità con Dio",
+        "versetto_chiave": "«Signore, insegnaci a pregare»"
+    },
+    "giovedi": {
+        "lettura": "Dal Vangelo secondo Giovanni (6,35-40)",
+        "tema": "Pane di vita, speranza, fedeltà",
+        "versetto_chiave": "«Chi viene a me non avrà fame»"
+    },
+    "venerdi": {
+        "lettura": "Dal Vangelo secondo Matteo (9,9-13)",
+        "tema": "Misericordia, conversione, chiamata",
+        "versetto_chiave": "«Misericordia io voglio e non sacrifici»"
+    },
+    "sabato": {
+        "lettura": "Dal Vangelo secondo Luca (18,1-8)",
+        "tema": "Perseveranza, preghiera, fiducia",
+        "versetto_chiave": "«Pregare sempre, senza stancarsi»"
+    }
+}
+
+import datetime
+
+def liturgia_del_giorno():
+    giorno = datetime.datetime.now().strftime("%A").lower()
+
+    mapping = {
+        "monday": "lunedi",
+        "tuesday": "martedi",
+        "wednesday": "mercoledi",
+        "thursday": "giovedi",
+        "friday": "venerdi",
+        "saturday": "sabato",
+        "sunday": "domenica"
+    }
+
+    giorno_it = mapping.get(giorno, "domenica")
+    return liturgia.get(giorno_it, liturgia["domenica"])
+    
+# -----------------------------
+# COMMENTO LITURGICO (MODULO)
+# -----------------------------
+
+def genera_commento_liturgico(lettura, tema_liturgico, versetto_liturgico):
+    """
+    Genera un commento liturgico più lungo e contemplativo,
+    basato sulla liturgia del giorno.
+    """
+
+    prompt_commento = f"""
+Sei un accompagnatore spirituale cattolico.
+Genera un commento liturgico lungo, contemplativo e pastorale.
+
+LITURGIA DEL GIORNO
+- Lettura: {lettura}
+- Tema liturgico: {tema_liturgico}
+- Versetto chiave: {versetto_liturgico}
+
+ISTRUZIONI
+- Non fare esegesi tecnica.
+- Non essere accademico.
+- Non usare linguaggio complesso.
+- Non moralizzare.
+- Offri una meditazione che aiuti a pregare.
+- Collega la liturgia alla vita quotidiana.
+- Sii dolce, profondo, paterno e fraterno.
+- Lunghezza: 2–3 paragrafi brevi.
+
+OBIETTIVO
+Offrire una meditazione che possa essere letta lentamente,
+come un piccolo momento di lectio divina.
+"""
+
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    body = {
+        "model": GROQ_MODEL,
+        "messages": [
+            {"role": "system", "content": prompt_commento}
+        ]
+    }
+
+    response = requests.post(GROQ_API_URL, headers=headers, json=body)
+
+    try:
+        data = response.json()
+        return data["choices"][0]["message"]["content"].strip()
+    except:
+        return "Oggi la liturgia ci invita a fermarci, ad ascoltare la Parola e a lasciarci toccare dal suo silenzioso abbraccio."
+        
+# -----------------------------
+# COMMENTO LITURGICO (VERSIONE AVANZATA)
+# -----------------------------
+
+def genera_commento_liturgico_avanzato(lettura, tema_liturgico, versetto_liturgico,
+                                       tema_utente, emozione, bisogno, intensita):
+    """
+    Genera un commento liturgico lungo, contemplativo e personalizzato,
+    integrando liturgia del giorno e vissuto dell'utente.
+    """
+
+    prompt_commento = f"""
+Sei un accompagnatore spirituale cattolico.
+Genera un commento liturgico lungo, profondo e contemplativo,
+che unisca la liturgia del giorno al vissuto dell'utente.
+
+LITURGIA DEL GIORNO
+- Lettura: {lettura}
+- Tema liturgico: {tema_liturgico}
+- Versetto chiave: {versetto_liturgico}
+
+VISSUTO DELL'UTENTE
+- Tema spirituale: {tema_utente}
+- Emozione dominante: {emozione}
+- Bisogno spirituale: {bisogno}
+- Intensità del vissuto: {intensita}
+
+STRUTTURA RICHIESTA (LECTIO DIVINA)
+1. LECTIO — Cosa dice la Parola oggi? Spiega con semplicità.
+2. MEDITATIO — Cosa dice questa Parola alla vita dell’utente?
+   Collega la liturgia al suo vissuto, con delicatezza.
+3. ORATIO — Offri una breve preghiera ispirata alla liturgia.
+4. CONTEMPLATIO — Una frase finale che rimanga nel cuore.
+
+STILE
+- Non fare esegesi tecnica.
+- Non essere accademico.
+- Non moralizzare.
+- Sii paterno, fraterno, contemplativo.
+- Sii dolce, profondo, semplice.
+- Lunghezza: 3–4 paragrafi brevi.
+
+OBIETTIVO
+Offrire una meditazione che aiuti a pregare e a sentire la vicinanza di Dio.
+"""
+
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    body = {
+        "model": GROQ_MODEL,
+        "messages": [
+            {"role": "system", "content": prompt_commento}
+        ]
+    }
+
+    response = requests.post(GROQ_API_URL, headers=headers, json=body)
+
+    try:
+        data = response.json()
+        return data["choices"][0]["message"]["content"].strip()
+    except:
+        return (
+            "Oggi la liturgia ci invita a fermarci, ad ascoltare la Parola e a lasciarci "
+            "toccare dal suo silenzioso abbraccio. Anche nel tuo vissuto, Dio desidera "
+            "parlarti con delicatezza e luce."
+        )
+
+# -----------------------------
+# CITAZIONI BIBLICHE E SANTI
+# -----------------------------
+
+versetti_biblici = {
+    "paura": "«Non temere, perché io sono con te» (Isaia 41,10)",
+    "solitudine": "«Il Signore è vicino a chi ha il cuore ferito» (Salmo 34,19)",
+    "colpa": "«Dove abbondò il peccato, sovrabbondò la grazia» (Romani 5,20)",
+    "tristezza": "«Il Signore asciugherà ogni lacrima» (Apocalisse 21,4)",
+    "speranza": "«Io conosco i progetti che ho fatto per voi» (Geremia 29,11)",
+    "vocazione": "«Parla, Signore, il tuo servo ascolta» (1 Samuele 3,10)",
+    "prova_sofferenza": "«Ti basta la mia grazia» (2 Corinzi 12,9)",
+    "perdono": "«Rimetti a noi i nostri debiti» (Matteo 6,12)",
+    "amore": "«Dio è amore» (1 Giovanni 4,8)",
+    "discernimento": "«Mostrami, Signore, la tua via» (Salmo 86,11)",
+    "generale": "«Il Signore è il mio pastore: non manco di nulla» (Salmo 23,1)"
+}
+
+frasi_santi = {
+    "paura": "«La paura è un nemico della fede» – San Pio da Pietrelcina",
+    "solitudine": "«Dio è più intimo a noi di quanto noi lo siamo a noi stessi» – Sant’Agostino",
+    "colpa": "«Dio non si stanca mai di perdonarci» – Papa Francesco",
+    "tristezza": "«La tristezza non viene da Dio» – San Francesco d’Assisi",
+    "speranza": "«La speranza è la virtù dei cuori forti» – Santa Teresa d’Avila",
+    "vocazione": "«Fai ciò che puoi, e Dio farà il resto» – San Giovanni Bosco",
+    "prova_sofferenza": "«Nulla ti turbi, nulla ti spaventi: solo Dio basta» – Santa Teresa d’Avila",
+    "perdono": "«È nella misericordia che si vede il volto di Dio» – San Giovanni Paolo II",
+    "amore": "«Dove non c’è amore, metti amore» – San Giovanni della Croce",
+    "discernimento": "«La volontà di Dio è la nostra pace» – Santa Chiara",
+    "generale": "«Tutto posso in Colui che mi dà forza» – San Paolo"
+}
+
+def recupera_citazioni(tema):
+    tema = tema.lower()
+    versetto = versetti_biblici.get(tema, versetti_biblici["generale"])
+    santo = frasi_santi.get(tema, frasi_santi["generale"])
+    return versetto, santo
+
+# -----------------------------
+# PROMPT MAESTRO (VERSIONE COMPLETA)
+# -----------------------------
+
+def genera_prompt(testo_utente, tema, versetto, frase_santo, blend_toni,
+                  lettura, tema_liturgico, versetto_liturgico,
+                  commento_liturgico):
+    return f"""
+IDENTITÀ
+Tu sei un accompagnatore spirituale cattolico.
+Parli con dolcezza, profondità e rispetto.
+Non giudichi, non imponi, non moralizzi.
+Ascolti il cuore della persona e la accompagni verso Dio con misericordia.
+
+INTENZIONE
+Il tuo compito è offrire una risposta che consoli, illumini e orienti verso la presenza di Dio.
+Non dai consigli pratici rischiosi.
+Non fai diagnosi psicologiche.
+Non sostituisci un sacerdote.
+Offri luce, pace e speranza.
+
+TONO
+La tua voce è una sintesi armoniosa di:
+- paternità (protezione, fermezza)
+- fraternità (vicinanza, empatia)
+- contemplazione (silenzio, profondità)
+- pastorale (equilibrio, misericordia)
+Blend dei toni da applicare: {blend_toni}
+
+INPUT UTENTE
+{testo_utente}
+
+TEMA SPIRITUALE
+{tema}
+
+CITAZIONI
+Versetto biblico: {versetto}
+Frase di un santo: {frase_santo}
+
+LITURGIA DEL GIORNO
+Lettura: {lettura}
+Tema liturgico: {tema_liturgico}
+Versetto chiave: {versetto_liturgico}
+Integra la liturgia solo se è naturale e utile alla persona.
+
+COMMENTO LITURGICO APPROFONDITO
+{commento_liturgico}
+
+PRUDENZA PASTORALE
+- Non dare consigli medici, psicologici o legali.
+- Non fare diagnosi.
+- Non promettere miracoli specifici.
+- Non usare toni colpevolizzanti.
+- Non contraddire la dottrina cattolica.
+- Non citare testi non verificati.
+- Non usare linguaggio manipolativo.
+
+STRUTTURA DELLA RISPOSTA
+1. Accoglienza empatica.
+2. Luce dalla Parola e dai Santi.
+3. Collegamento con la liturgia del giorno (solo se naturale).
+4. Riflessione spirituale personalizzata.
+5. Invito alla pace e alla fiducia.
+6. Breve preghiera finale (opzionale).
+
+OBIETTIVO FINALE
+Genera una risposta spirituale profonda, consolante e teologicamente solida,
+che aiuti la persona a percepire la vicinanza di Dio.
+"""
+
+# -----------------------------
+# ENDPOINT UNICO /risposta
+# -----------------------------
+
+@app.post("/risposta", response_model=RispostaFinale)
+def risposta_unica(payload: RispostaRequest):
+    domanda = payload.domanda
+
+    # 1️⃣ Classificazione del tema
+    tema = classify_tema(domanda)
+
+    # 2️⃣ Citazioni vere (Bibbia + Santi)
+    versetto, frase_santo = recupera_citazioni(tema)
+
+    # 3️⃣ Analisi emotiva (placeholder)
+    emozione = "non_specificata"
+    bisogno = "non_specificato"
+    intensita = "media"
+
+    # 4️⃣ Blend dei toni
+    blend_toni = "40% fraterno, 40% paterno, 20% contemplativo"
+
+    # 5️⃣ Liturgia del giorno
+    lit = liturgia_del_giorno()
+    lettura = lit["lettura"]
+    tema_liturgico = lit["tema"]
+    versetto_liturgico = lit["versetto_chiave"]
+
+    # 6️⃣ Commento liturgico avanzato
+    commento_liturgico = genera_commento_liturgico_avanzato(
+        lettura=lettura,
+        tema_liturgico=tema_liturgico,
+        versetto_liturgico=versetto_liturgico,
+        tema_utente=tema,
+        emozione=emozione,
+        bisogno=bisogno,
+        intensita=intensita
+    )
+
+    # 7️⃣ SYSTEM MESSAGE (istruzioni fisse)
+    system_message = """
+Sei un assistente spirituale cattolico. Rispondi con tono caldo, fraterno, paterno e contemplativo.
+La tua risposta deve SEMPRE contenere:
+- una citazione biblica centrale
+- un riferimento liturgico del giorno
+- un pensiero di un Santo
+- un invito concreto alla preghiera o a un gesto spirituale
+- una breve preghiera finale
+- zero errori grammaticali
+- Non usare mai “cara fratello” o altre combinazioni grammaticalmente errate.
+Usa sempre “caro fratello” oppure “cara sorella” in base al genere percepito dal testo dell’utente.
+Se il genere non è chiaro, usa “caro amico”.
+Puoi usare immagini poetiche, metafore bibliche e simboli spirituali. La struttura può variare liberamente.
+Puoi variare liberamente stile, immagini, metafore e struttura.
+Usa un linguaggio poetico, simbolico e meditativo, ricco di immagini spirituali e contemplative.
+"""
+
+    # 8️⃣ USER MESSAGE (il tuo prompt maestro, IDENTICO)
+    user_message = f"""
+Sei un assistente spirituale cattolico. Rispondi con tono caldo, fraterno, paterno e contemplativo.
+La tua risposta deve SEMPRE contenere:
+- una citazione biblica centrale
+- un riferimento liturgico del giorno (se rilevante)
+- un pensiero di un Santo (se disponibile)
+- un invito concreto alla preghiera o a un gesto spirituale
+- una breve preghiera finale
+- zero errori grammaticali
+- Non usare mai “cara fratello” o altre combinazioni grammaticalmente errate. Usa sempre “caro fratello” oppure “cara sorella” in base al genere percepito dal testo dell’utente. Se il genere non è chiaro, usa “caro amico”. Puoi variare liberamente stile, immagini, metafore e struttura.
+
+Informazioni per costruire la risposta:
+- Tema utente: {tema}
+- Versetto biblico principale: {versetto}
+- Frase di un Santo: {frase_santo}
+- Lettura liturgica del giorno: {lettura}
+- Tema liturgico: {tema_liturgico}
+- Versetto liturgico chiave: {versetto_liturgico}
+- Commento liturgico avanzato: {commento_liturgico}
+- Emozione percepita: {emozione}
+- Bisogno spirituale: {bisogno}
+- Intensità emotiva: {intensita}
+- Blend dei toni: {blend_toni}
+
+Domanda dell’utente:
+{domanda}
+
+Genera una risposta spirituale profonda, coerente, cattolica, creativa, varia, non ripetitiva, senza ripetizioni inutili e piena di immagini spirituali.
+"""
+
+    # 9️⃣ Chiamata a Groq (temperature 1.3 ATTIVA)
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    body = {
+        "model": GROQ_MODEL,
+        "temperature": 1.3,
+        "messages": [
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": user_message}
+        ]
+    }
+
+    groq_response = requests.post(GROQ_API_URL, headers=headers, json=body)
+
+    # 🔍 LOG COMPLETO DELLA RISPOSTA
+    print("📨 RISPOSTA GREZZA GROQ:", groq_response.text)
+
+    # 🔟 Parsing JSON
+    try:
+        groq_json = groq_response.json()
+    except Exception as e:
+        print("❌ Errore nel parsing JSON:", e)
+        return RispostaFinale(
+            risposta="Errore nella generazione della risposta spirituale.",
+            tema=tema,
+            messaggio=versetto,
+            fonte="Errore interno",
+            nota=frase_santo
+        )
+
+    if "choices" not in groq_json:
+        print("❌ Nessun campo 'choices' nella risposta Groq:", groq_json)
+        return RispostaFinale(
+            risposta="Errore nella generazione della risposta spirituale.",
+            tema=tema,
+            messaggio=versetto,
+            fonte="Errore interno",
+            nota=frase_santo
+        )
+
+    risposta_groq = groq_json["choices"][0]["message"]["content"]
+
+    # 1️⃣1️⃣ Fonte completa (Bibbia + Liturgia + Santo)
+    fonte_completa = f"Bibbia: {versetto}; Liturgia del giorno: {versetto_liturgico}; Santo: {frase_santo}"
+
+    # 1️⃣2️⃣ Risposta finale
+    return RispostaFinale(
+        risposta=risposta_groq.strip(),
+        tema=tema,
+        messaggio=versetto,
+        fonte=fonte_completa,
+        nota=frase_santo
+    )
+
+# -----------------------------
+# ENDPOINT: Tutti i messaggi di un tema
+# -----------------------------
+@app.get("/messaggi/{tema}")
+def get_all_messages_by_tema(tema: str):
+    messages = get_messages_by_tema(tema)
+
+    if not messages:
+        return {"errore": "Tema non trovato", "tema": tema}
+
+    return {"tema": tema, "messaggi": messages}
 
 # -----------------------------
 # MOTORE SPIRITUALE SUPERVISIONATO (VERSIONE v5)
