@@ -1,0 +1,1256 @@
+[
+  {
+    "tema": "paura",
+    "messaggio": "Dio sostiene chi ha paura e lo invita a confidare nella Sua presenza.",
+    "fonte": "Isaia 41",
+    "nota": "La paura si trasforma in fiducia attraverso la preghiera."
+  },
+  {
+    "tema": "solitudine",
+    "messaggio": "Nessuno è veramente solo: Dio abita il silenzio e accompagna ogni cuore.",
+    "fonte": "Salmi",
+    "nota": "La solitudine può diventare luogo di incontro con Dio."
+  },
+  {
+    "tema": "colpa",
+    "messaggio": "La misericordia di Dio è più grande di ogni caduta; il perdono è sempre possibile.",
+    "fonte": "Catechismo",
+    "nota": "La colpa riconosciuta apre alla grazia."
+  },
+  {
+    "tema": "tristezza",
+    "messaggio": "Cristo ha conosciuto la tristezza e consola chi soffre interiormente.",
+    "fonte": "Vangelo",
+    "nota": "La tristezza può diventare preghiera e offerta."
+  },
+  {
+    "tema": "gioia",
+    "messaggio": "La vera gioia nasce dall'incontro con Dio e dalla gratitudine.",
+    "fonte": "Vangelo",
+    "nota": "La gioia cristiana è interiore e stabile."
+  },
+  {
+    "tema": "amore",
+    "messaggio": "L'amore cristiano nasce dall'amore di Dio e si esprime nel dono di sé.",
+    "fonte": "1 Giovanni",
+    "nota": "L'amore è la vocazione fondamentale dell'uomo."
+  },
+  {
+    "tema": "fedeltà",
+    "messaggio": "Dio rimane fedele anche quando noi vacilliamo.",
+    "fonte": "Lettere di Paolo",
+    "nota": "La fedeltà è partecipazione alla fedeltà divina."
+  },
+  {
+    "tema": "coraggio",
+    "messaggio": "Il coraggio cristiano nasce dalla fiducia in Dio, non dalle proprie forze.",
+    "fonte": "Giosuè",
+    "nota": "Il coraggio è frutto dello Spirito Santo."
+  },
+  {
+    "tema": "discernimento",
+    "messaggio": "Lo Spirito Santo guida il cuore a riconoscere ciò che viene da Dio.",
+    "fonte": "Atti degli Apostoli",
+    "nota": "Il discernimento richiede ascolto, silenzio e preghiera."
+  },
+  {
+    "tema": "pazienza",
+    "messaggio": "La pazienza è la forza di chi confida nei tempi di Dio.",
+    "fonte": "Lettere di Giacomo",
+    "nota": "La pazienza nasce dalla speranza."
+  },
+  {
+    "tema": "silenzio",
+    "messaggio": "Nel silenzio il cuore ascolta la voce di Dio.",
+    "fonte": "Tradizione spirituale",
+    "nota": "Il silenzio è luogo di rivelazione e purificazione."
+  },
+  {
+    "tema": "speranza",
+    "messaggio": "La speranza cristiana non delude perché fondata sulla risurrezione di Cristo.",
+    "fonte": "Nuovo Testamento",
+    "nota": "La speranza sostiene nei momenti difficili."
+  },
+  {
+    "tema": "sofferenza",
+    "messaggio": "La sofferenza unita a Cristo diventa luogo di trasformazione.",
+    "fonte": "Nuovo Testamento",
+    "nota": "La croce è via di crescita spirituale."
+  },
+  {
+    "tema": "perdono",
+    "messaggio": "Perdonare è partecipare alla misericordia di Dio.",
+    "fonte": "Vangelo",
+    "nota": "Il perdono libera il cuore e guarisce le relazioni."
+  },
+  {
+    "tema": "umiltà",
+    "messaggio": "L'umiltà apre il cuore alla grazia e alla verità.",
+    "fonte": "Tradizione spirituale",
+    "nota": "L'umiltà è la base di ogni virtù."
+  },
+  {
+    "tema": "gratitudine",
+    "messaggio": "Il cuore grato riconosce i doni di Dio anche nelle piccole cose.",
+    "fonte": "Salmi",
+    "nota": "La gratitudine genera gioia e pace."
+  },
+  {
+    "tema": "tentazione",
+    "messaggio": "Nella tentazione Dio offre sempre una via d'uscita.",
+    "fonte": "Nuovo Testamento",
+    "nota": "La tentazione non è peccato: diventa occasione di crescita."
+  },
+  {
+    "tema": "vocazione",
+    "messaggio": "Ogni persona è chiamata da Dio a un cammino unico e irripetibile.",
+    "fonte": "Catechismo",
+    "nota": "La vocazione è risposta d'amore alla chiamata di Dio."
+  },
+  {
+    "tema": "generale",
+    "messaggio": "Dio cammina accanto a te anche quando non lo senti.",
+    "fonte": "Salmo 23",
+    "nota": "La presenza di Dio è silenziosa ma fedele."
+  },
+  {
+    "tema": "paura",
+    "messaggio": "Dio si avvicina a chi trema e posa una luce discreta sulle sue ombre.",
+    "fonte": "Parafrasi ispirata a Papa Francesco",
+    "nota": "La paura non è mai l’ultima parola: la fiducia apre un varco."
+  },
+  {
+    "tema": "paura",
+    "messaggio": "Nel cuore impaurito Dio non entra con forza, ma con un passo lieve che consola.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "La tenerezza di Dio scioglie ciò che paralizza."
+  },
+  {
+    "tema": "paura",
+    "messaggio": "Quando il cuore vacilla, Dio diventa roccia e riparo, come un padre che veglia nella notte.",
+    "fonte": "Salmo 27 (dominio pubblico)",
+    "nota": "La luce di Dio non abbaglia: guida."
+  },
+  {
+    "tema": "paura",
+    "messaggio": "La paura si placa quando ci si lascia guardare da Dio, che non giudica ma sostiene.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La fiducia nasce dall’essere amati senza condizioni."
+  },
+  {
+    "tema": "paura",
+    "messaggio": "Dio non toglie sempre la paura, ma la attraversa con noi, come un compagno silenzioso.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "La presenza di Dio è più forte dell’emozione che ci assale."
+  },
+  {
+    "tema": "paura",
+    "messaggio": "Nel momento in cui tutto trema, Dio resta fermo e ci invita a respirare nel suo respiro.",
+    "fonte": "San Francesco d’Assisi (dominio pubblico), ispirazione",
+    "nota": "La pace nasce dall’affidamento."
+  },
+  {
+    "tema": "paura",
+    "messaggio": "La paura è una porta che Dio apre dall’interno, trasformandola in cammino.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "Ogni timore può diventare un passaggio verso la luce."
+  },
+  {
+    "tema": "paura",
+    "messaggio": "Dio non chiede di essere forti, ma di lasciarsi prendere per mano quando il cuore vacilla.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "La fragilità non è un ostacolo: è un luogo d’incontro."
+  },
+  {
+    "tema": "paura",
+    "messaggio": "Quando la paura chiude, Dio apre: una fessura, un respiro, un passo possibile.",
+    "fonte": "Isaia 41 (dominio pubblico), rielaborazione",
+    "nota": "La promessa di Dio sostiene il cammino."
+  },
+  {
+    "tema": "paura",
+    "messaggio": "Dio non parla alla paura con rumore, ma con un sussurro che rassicura il cuore.",
+    "fonte": "Elia sull’Oreb, 1Re 19 (dominio pubblico)",
+    "nota": "La voce di Dio è una brezza che calma."
+  },
+  {
+    "tema": "solitudine",
+    "messaggio": "Dio siede accanto a chi si sente solo e trasforma il silenzio in una presenza che scalda.",
+    "fonte": "Parafrasi ispirata a Papa Francesco",
+    "nota": "La solitudine non è vuoto: è spazio che Dio abita."
+  },
+  {
+    "tema": "solitudine",
+    "messaggio": "Quando il cuore si isola, Dio entra come un amico che non chiede parole ma offre ascolto.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "La compagnia di Dio non pesa: sostiene."
+  },
+  {
+    "tema": "solitudine",
+    "messaggio": "Nel deserto interiore, Dio apre un sentiero e cammina con passo leggero accanto a noi.",
+    "fonte": "Esodo, cammino nel deserto (dominio pubblico)",
+    "nota": "Ogni deserto può diventare luogo di incontro."
+  },
+  {
+    "tema": "solitudine",
+    "messaggio": "La solitudine non è un muro, ma una porta che Dio apre dall’interno con la Sua luce.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "La luce di Dio entra anche nelle stanze più chiuse."
+  },
+  {
+    "tema": "solitudine",
+    "messaggio": "Dio non lascia mai solo chi lo cerca: si fa vicino come un respiro che accompagna.",
+    "fonte": "Salmo 139 (dominio pubblico)",
+    "nota": "Dio è più intimo a noi di noi stessi."
+  },
+  {
+    "tema": "solitudine",
+    "messaggio": "Quando tutto sembra lontano, Dio resta vicino e custodisce il cuore come un padre premuroso.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La vicinanza di Dio è una promessa che non viene meno."
+  },
+  {
+    "tema": "solitudine",
+    "messaggio": "Dio entra nella solitudine come una carezza che non chiede nulla e dona pace.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "La pace nasce quando ci si lascia toccare da Dio."
+  },
+  {
+    "tema": "solitudine",
+    "messaggio": "Nel silenzio più profondo, Dio parla con una voce che non fa rumore ma illumina.",
+    "fonte": "1Re 19, Elia sull’Oreb (dominio pubblico)",
+    "nota": "La voce di Dio è una brezza che consola."
+  },
+  {
+    "tema": "solitudine",
+    "messaggio": "Dio non riempie la solitudine con parole, ma con una presenza che non abbandona.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "La presenza di Dio è più forte dell’assenza che sentiamo."
+  },
+  {
+    "tema": "solitudine",
+    "messaggio": "Quando ti senti solo, Dio ti guarda con una tenerezza che nessuno può toglierti.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "La tenerezza di Dio è un rifugio sicuro."
+  },
+  {
+    "tema": "colpa",
+    "messaggio": "Dio non guarda la caduta, ma il desiderio di rialzarsi che nasce nel cuore.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "La misericordia precede sempre il nostro ritorno."
+  },
+  {
+    "tema": "colpa",
+    "messaggio": "La colpa non è un muro, ma una soglia che Dio apre con la Sua tenerezza.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "La fragilità diventa luogo di incontro con Dio."
+  },
+  {
+    "tema": "colpa",
+    "messaggio": "Dio non si stanca di perdonare: siamo noi che ci stanchiamo di chiedere perdono.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "Il perdono è un dono che rinnova la vita."
+  },
+  {
+    "tema": "colpa",
+    "messaggio": "Quando il cuore si sente appesantito, Dio lo alleggerisce con una carezza di pace.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "La pace nasce dal lasciarsi perdonare."
+  },
+  {
+    "tema": "colpa",
+    "messaggio": "La colpa riconosciuta diventa un varco attraverso cui entra la luce di Dio.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "La luce non giudica: trasforma."
+  },
+  {
+    "tema": "colpa",
+    "messaggio": "Dio non punta il dito, ma tende la mano a chi si sente smarrito.",
+    "fonte": "Vangelo del Buon Pastore (dominio pubblico)",
+    "nota": "Dio cerca ciò che si è perduto per riportarlo a casa."
+  },
+  {
+    "tema": "colpa",
+    "messaggio": "La colpa non è l’ultima parola: Dio scrive sempre una storia nuova.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "Ogni ritorno a Dio è un nuovo inizio."
+  },
+  {
+    "tema": "colpa",
+    "messaggio": "Dio non umilia chi cade, ma lo rialza con una dignità più grande di prima.",
+    "fonte": "San Francesco di Sales (dominio pubblico), ispirazione",
+    "nota": "La dignità dell’uomo nasce dall’amore di Dio."
+  },
+  {
+    "tema": "colpa",
+    "messaggio": "Quando il cuore si pente, Dio corre incontro come un padre che attende da tempo.",
+    "fonte": "Parabola del Figliol Prodigo (dominio pubblico)",
+    "nota": "Il perdono di Dio è festa, non rimprovero."
+  },
+  {
+    "tema": "colpa",
+    "messaggio": "Dio non chiede perfezione, ma un cuore che si lascia toccare dalla Sua misericordia.",
+    "fonte": "Santa Teresa di Lisieux (dominio pubblico), ispirazione",
+    "nota": "La piccolezza apre alla grazia."
+  },
+  {
+    "tema": "tristezza",
+    "messaggio": "Dio si avvicina a chi è triste e posa una mano lieve sul cuore affaticato.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "La tristezza non è un fallimento: è un luogo che Dio visita."
+  },
+  {
+    "tema": "tristezza",
+    "messaggio": "Quando il cuore si oscura, Dio accende una piccola luce che non si spegne.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "La luce di Dio nasce nelle notti più profonde."
+  },
+  {
+    "tema": "tristezza",
+    "messaggio": "Dio non chiede di nascondere la tristezza, ma di consegnarla alle Sue mani pazienti.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "La tristezza condivisa diventa più leggera."
+  },
+  {
+    "tema": "tristezza",
+    "messaggio": "Cristo ha pianto: per questo comprende ogni lacrima che scende senza rumore.",
+    "fonte": "Vangelo di Giovanni 11 (dominio pubblico)",
+    "nota": "Le lacrime non sono debollezza: sono preghiera."
+  },
+  {
+    "tema": "tristezza",
+    "messaggio": "Dio entra nella tristezza come un amico che non giudica, ma resta accanto.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "La presenza di Dio consola più delle parole."
+  },
+  {
+    "tema": "tristezza",
+    "messaggio": "Quando tutto sembra perduto, Dio apre un varco che il cuore non vede ancora.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La speranza nasce spesso nel buio."
+  },
+  {
+    "tema": "tristezza",
+    "messaggio": "Dio raccoglie la tristezza come un seme e ne fa germogliare una pace nuova.",
+    "fonte": "Salmo 126 (dominio pubblico), ispirazione",
+    "nota": "Dalla sofferenza può nascere consolazione."
+  },
+  {
+    "tema": "tristezza",
+    "messaggio": "La tristezza non è un vicolo cieco: Dio la attraversa con noi, passo dopo passo.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "Dio cammina nella nostra notte."
+  },
+  {
+    "tema": "tristezza",
+    "messaggio": "Dio non cancella la tristezza, ma la trasforma in un luogo dove il cuore impara a fidarsi.",
+    "fonte": "Santa Teresa d’Avila (dominio pubblico), ispirazione",
+    "nota": "La fiducia cresce anche nelle lacrime."
+  },
+  {
+    "tema": "tristezza",
+    "messaggio": "Quando il cuore è stanco, Dio lo avvolge in un silenzio che cura e rinnova.",
+    "fonte": "Tradizione monastica (dominio pubblico)",
+    "nota": "Il silenzio di Dio è una carezza che guarisce."
+  },
+  {
+    "tema": "gioia",
+    "messaggio": "La gioia nasce quando lasci che Dio ti guardi con bontà e ti riconosca come figlio amato.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "La gioia cristiana è frutto dello sguardo di Dio."
+  },
+  {
+    "tema": "gioia",
+    "messaggio": "La gioia non è euforia, ma una pace che scende nel cuore come una luce discreta.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "La gioia vera è silenziosa e profonda."
+  },
+  {
+    "tema": "gioia",
+    "messaggio": "La gioia cresce quando smetti di trattenere tutto e ti lasci sorprendere dalla grazia.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "La gioia nasce dall’apertura del cuore."
+  },
+  {
+    "tema": "gioia",
+    "messaggio": "Dio semina gioia anche nei giorni più semplici, come un seme che germoglia senza rumore.",
+    "fonte": "Parabole del Regno (dominio pubblico)",
+    "nota": "La gioia è un dono che cresce nel quotidiano."
+  },
+  {
+    "tema": "gioia",
+    "messaggio": "La gioia cristiana non dipende dalle circostanze, ma dalla certezza che Dio è vicino.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La vicinanza di Dio sostiene il cuore."
+  },
+  {
+    "tema": "gioia",
+    "messaggio": "Dio accende la gioia come un fuoco mite che scalda senza bruciare.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "La gioia è un calore che nasce dall’amore."
+  },
+  {
+    "tema": "gioia",
+    "messaggio": "La gioia è un dono che Dio fa a chi si affida, come un raggio che attraversa le nuvole.",
+    "fonte": "Salmo 97 (dominio pubblico), ispirazione",
+    "nota": "La gioia è luce che vince l’ombra."
+  },
+  {
+    "tema": "gioia",
+    "messaggio": "La gioia non è assenza di fatica, ma presenza di Dio che sostiene il cammino.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "La gioia nasce dalla comunione con Dio."
+  },
+  {
+    "tema": "gioia",
+    "messaggio": "Dio dona una gioia che nessuno può togliere, perché nasce dal cuore stesso di Cristo.",
+    "fonte": "Vangelo di Giovanni 16 (dominio pubblico)",
+    "nota": "La gioia di Cristo è stabile e fedele."
+  },
+  {
+    "tema": "gioia",
+    "messaggio": "La gioia è un respiro che si apre quando il cuore riconosce di essere amato senza misura.",
+    "fonte": "Santa Teresa di Lisieux (dominio pubblico), ispirazione",
+    "nota": "La gioia fiorisce nella fiducia."
+  },
+  {
+    "tema": "amore",
+    "messaggio": "L’amore nasce quando lasci che Dio ti ami per primo, senza condizioni e senza meriti.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "L’amore cristiano è risposta a un amore ricevuto."
+  },
+  {
+    "tema": "amore",
+    "messaggio": "L’amore non è possesso, ma spazio che si apre perché l’altro possa respirare.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "L’amore vero libera, non trattiene."
+  },
+  {
+    "tema": "amore",
+    "messaggio": "L’amore cristiano nasce dalla ferita guarita: ciò che è stato toccato da Dio diventa dono.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "L’amore cresce nella fragilità accolta."
+  },
+  {
+    "tema": "amore",
+    "messaggio": "Dio ama con una tenerezza che non giudica, ma rialza e ricomincia.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La tenerezza è la forma più alta dell’amore."
+  },
+  {
+    "tema": "amore",
+    "messaggio": "L’amore è un fuoco mite che scalda senza bruciare e illumina senza accecare.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "L’amore è luce che consola."
+  },
+  {
+    "tema": "amore",
+    "messaggio": "Dio ama ciascuno come se fosse l’unico, con un’attenzione che non si divide.",
+    "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+    "nota": "L’amore di Dio è personale e unico."
+  },
+  {
+    "tema": "amore",
+    "messaggio": "L’amore è un cammino: si impara passo dopo passo, lasciandosi guidare dallo Spirito.",
+    "fonte": "Lettere di Paolo (dominio pubblico), ispirazione",
+    "nota": "L’amore cresce nella pazienza e nella fedeltà."
+  },
+  {
+    "tema": "amore",
+    "messaggio": "L’amore non nasce dalla forza, ma dalla capacità di lasciarsi toccare dal dolore dell’altro.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "La compassione è la forma più profonda dell’amore."
+  },
+  {
+    "tema": "amore",
+    "messaggio": "Dio ama con un cuore che non si stanca mai, anche quando noi ci allontaniamo.",
+    "fonte": "Parabola del Pastore (dominio pubblico)",
+    "nota": "L’amore di Dio è perseverante."
+  },
+  {
+    "tema": "amore",
+    "messaggio": "L’amore è un sì che si rinnova ogni giorno, anche quando costa.",
+    "fonte": "Santa Teresa di Calcutta, parafrasi",
+    "nota": "L’amore fedele nasce nei piccoli gesti quotidiani."
+  },
+  {
+    "tema": "fedeltà",
+    "messaggio": "La fedeltà di Dio è come un filo d’oro che attraversa la nostra storia, anche quando noi non lo vediamo.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "Dio resta anche quando noi ci allontaniamo."
+  },
+  {
+    "tema": "fedeltà",
+    "messaggio": "La fedeltà non è mai rumore: è un passo che ritorna, una presenza che non abbandona.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "La fedeltà è silenziosa ma tenace."
+  },
+  {
+    "tema": "fedeltà",
+    "messaggio": "Dio rimane fedele ai Suoi sogni su di noi, anche quando noi li dimentichiamo.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "La fedeltà di Dio custodisce la nostra vocazione."
+  },
+  {
+    "tema": "fedeltà",
+    "messaggio": "La fedeltà è un amore che non si arrende, che attende, che ricomincia.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La fedeltà è forza che nasce dalla speranza."
+  },
+  {
+    "tema": "fedeltà",
+    "messaggio": "Dio resta accanto anche quando il cuore è stanco: la Sua fedeltà è riposo.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "La fedeltà consola più delle parole."
+  },
+  {
+    "tema": "fedeltà",
+    "messaggio": "La fedeltà non è un sentimento, ma una scelta che si rinnova ogni giorno.",
+    "fonte": "Tradizione spirituale",
+    "nota": "La fedeltà cresce nella perseveranza."
+  },
+  {
+    "tema": "fedeltà",
+    "messaggio": "Dio è fedele perché ama, e il Suo amore non conosce stagioni.",
+    "fonte": "Salmo 136 (dominio pubblico), ispirazione",
+    "nota": "La fedeltà di Dio è eterna."
+  },
+  {
+    "tema": "fedeltà",
+    "messaggio": "La fedeltà è un cammino che si percorre insieme, non un peso da portare da soli.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "La fedeltà è comunione."
+  },
+  {
+    "tema": "fedeltà",
+    "messaggio": "Dio non ritira mai la Sua promessa: la custodisce come un tesoro nel cuore.",
+    "fonte": "Lettere di Paolo (dominio pubblico), ispirazione",
+    "nota": "La fedeltà di Dio è garanzia di speranza."
+  },
+  {
+    "tema": "fedeltà",
+    "messaggio": "La fedeltà è un sì che attraversa il tempo, come un seme che continua a germogliare.",
+    "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+    "nota": "La fedeltà è fecondità."
+  },
+  {
+    "tema": "coraggio",
+    "messaggio": "Il coraggio nasce quando lasci che Dio ti prenda per mano proprio nel punto in cui ti senti più fragile.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "Il coraggio cristiano nasce dalla fiducia, non dalla forza."
+  },
+  {
+    "tema": "coraggio",
+    "messaggio": "Il coraggio non è assenza di paura, ma la scelta di non lasciare che la paura abbia l’ultima parola.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "Il coraggio cresce nella vulnerabilità accolta."
+  },
+  {
+    "tema": "coraggio",
+    "messaggio": "Dio accende il coraggio come una scintilla silenziosa che illumina il cammino un passo alla volta.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "Il coraggio è luce che nasce nel cuore."
+  },
+  {
+    "tema": "coraggio",
+    "messaggio": "Il coraggio cristiano è sapere che non cammini da solo: Dio precede ogni tuo passo.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La presenza di Dio rende possibile ciò che sembra impossibile."
+  },
+  {
+    "tema": "coraggio",
+    "messaggio": "Dio non chiede eroi, ma cuori che provano ancora una volta a rialzarsi.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "Il coraggio è un sì che ricomincia."
+  },
+  {
+    "tema": "coraggio",
+    "messaggio": "Il coraggio nasce quando il cuore ascolta la voce di Dio che dice: 'Non temere, sono con te'.",
+    "fonte": "Isaia 41 (dominio pubblico), ispirazione",
+    "nota": "La Parola di Dio è sorgente di coraggio."
+  },
+  {
+    "tema": "coraggio",
+    "messaggio": "Il coraggio non elimina la paura, ma la attraversa con la certezza di essere amati.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "Il coraggio è amore che sostiene."
+  },
+  {
+    "tema": "coraggio",
+    "messaggio": "Dio dona coraggio a chi si affida, come un vento leggero che spinge avanti anche quando le forze mancano.",
+    "fonte": "Salmo 27 (dominio pubblico), ispirazione",
+    "nota": "Il coraggio è fiducia che respira."
+  },
+  {
+    "tema": "coraggio",
+    "messaggio": "Il coraggio è un dono dello Spirito che rende stabile il cuore nelle tempeste.",
+    "fonte": "Tradizione spirituale",
+    "nota": "Il coraggio è fermezza mite."
+  },
+  {
+    "tema": "coraggio",
+    "messaggio": "Il vero coraggio è credere che Dio può far nascere vita anche dalle nostre paure.",
+    "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+    "nota": "Il coraggio è speranza che si apre."
+  },
+  {
+    "tema": "speranza",
+    "messaggio": "La speranza nasce quando lasci che Dio illumini anche ciò che non comprendi.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "La speranza è luce che precede il cammino."
+  },
+  {
+    "tema": "speranza",
+    "messaggio": "La speranza non è ottimismo, ma fiducia che Dio sta già operando nel silenzio.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "La speranza cresce nella pazienza."
+  },
+  {
+    "tema": "speranza",
+    "messaggio": "Dio accende la speranza come un seme che germoglia anche nella terra più arida.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "La speranza è un seme che non muore."
+  },
+  {
+    "tema": "speranza",
+    "messaggio": "La speranza cristiana è certezza che Dio mantiene le promesse, anche quando tutto sembra fermo.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La speranza si radica nella fedeltà di Dio."
+  },
+  {
+    "tema": "speranza",
+    "messaggio": "Dio non spegne la speranza, la custodisce come una brace sotto la cenere.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "La speranza è un fuoco mite che resiste."
+  },
+  {
+    "tema": "speranza",
+    "messaggio": "La speranza è sapere che Dio può far nascere vita anche dalle nostre ferite.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "La speranza è guarigione che inizia dentro."
+  },
+  {
+    "tema": "speranza",
+    "messaggio": "La speranza è un dono dello Spirito che rialza il cuore quando tutto sembra perduto.",
+    "fonte": "Tradizione spirituale",
+    "nota": "La speranza è forza che risolleva."
+  },
+  {
+    "tema": "speranza",
+    "messaggio": "Dio apre strade dove il cuore vede solo muri.",
+    "fonte": "Isaia 43 (dominio pubblico), ispirazione",
+    "nota": "La speranza è via che si apre."
+  },
+  {
+    "tema": "speranza",
+    "messaggio": "La speranza non è fuga dal presente, ma fiducia che Dio abita ogni istante.",
+    "fonte": "Lettere di Paolo (dominio pubblico), ispirazione",
+    "nota": "La speranza è presenza."
+  },
+  {
+    "tema": "speranza",
+    "messaggio": "La speranza è credere che Dio può fare nuove tutte le cose, anche quelle che sembrano finite.",
+    "fonte": "Apocalisse 21 (dominio pubblico), ispirazione",
+    "nota": "La speranza è novità che nasce."
+  },
+  {
+    "tema": "gratitudine",
+    "messaggio": "La gratitudine nasce quando riconosci che ogni giorno è un dono che Dio ti affida con delicatezza.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "La gratitudine apre il cuore alla gioia."
+  },
+  {
+    "tema": "gratitudine",
+    "messaggio": "La gratitudine è uno sguardo che vede il bene anche nelle piccole cose che spesso passano inosservate.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "La gratitudine illumina il quotidiano."
+  },
+  {
+    "tema": "gratitudine",
+    "messaggio": "La gratitudine non nasce dall’avere tutto, ma dal riconoscere che nulla ci è dovuto.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "La gratitudine libera dal bisogno di controllo."
+  },
+  {
+    "tema": "gratitudine",
+    "messaggio": "La gratitudine è memoria del cuore: ricorda ciò che Dio ha compiuto e apre alla fiducia.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La gratitudine rafforza la speranza."
+  },
+  {
+    "tema": "gratitudine",
+    "messaggio": "La gratitudine è un respiro che si allarga quando riconosci che Dio ti accompagna anche nei giorni difficili.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "La gratitudine nasce dalla consapevolezza della presenza di Dio."
+  },
+  {
+    "tema": "gratitudine",
+    "messaggio": "La gratitudine è un canto silenzioso che sale dal cuore quando scopre di essere amato.",
+    "fonte": "Tradizione spirituale",
+    "nota": "La gratitudine è preghiera."
+  },
+  {
+    "tema": "gratitudine",
+    "messaggio": "Riconoscere il bene ricevuto è già un modo per custodirlo e farlo crescere.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "La gratitudine genera comunione."
+  },
+  {
+    "tema": "gratitudine",
+    "messaggio": "La gratitudine è un dono dello Spirito che trasforma ciò che abbiamo in ciò che basta.",
+    "fonte": "Lettere di Paolo (dominio pubblico), ispirazione",
+    "nota": "La gratitudine è sufficienza del cuore."
+  },
+  {
+    "tema": "gratitudine",
+    "messaggio": "La gratitudine è riconoscere che ogni bene viene dall’alto e porta la firma di Dio.",
+    "fonte": "Giacomo 1 (dominio pubblico), ispirazione",
+    "nota": "La gratitudine riconosce l’origine dei doni."
+  },
+  {
+    "tema": "gratitudine",
+    "messaggio": "La gratitudine è un sì che si rinnova davanti alla vita, anche quando non tutto è chiaro.",
+    "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+    "nota": "La gratitudine è fiducia che cresce."
+  },
+  {
+    "tema": "umiltà",
+    "messaggio": "L’umiltà nasce quando riconosci che tutto è dono e nulla ti appartiene davvero.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "L’umiltà apre il cuore alla gratitudine."
+  },
+  {
+    "tema": "umiltà",
+    "messaggio": "L’umiltà non è sminuirsi, ma lasciare spazio a Dio perché possa agire in te.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "L’umiltà è fiducia nella grazia."
+  },
+  {
+    "tema": "umiltà",
+    "messaggio": "L’umiltà è un passo indietro che permette all’altro di respirare e di essere se stesso.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "L’umiltà è libertà donata."
+  },
+  {
+    "tema": "umiltà",
+    "messaggio": "L’umiltà è la porta attraverso cui Dio entra nel cuore e lo trasforma.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "L’umiltà rende il cuore disponibile alla grazia."
+  },
+  {
+    "tema": "umiltà",
+    "messaggio": "L’umiltà non è debolezza, ma forza mite che non ha bisogno di imporsi.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "L’umiltà è forza che non ferisce."
+  },
+  {
+    "tema": "umiltà",
+    "messaggio": "L’umiltà è riconoscere la propria verità davanti a Dio, senza maschere né paure.",
+    "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+    "nota": "L’umiltà è verità vissuta."
+  },
+  {
+    "tema": "umiltà",
+    "messaggio": "L’umiltà è sapere che non sei il centro, ma che sei infinitamente amato.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "L’umiltà nasce dall’amore ricevuto."
+  },
+  {
+    "tema": "umiltà",
+    "messaggio": "L’umiltà è un cammino che si percorre lentamente, lasciando che Dio plasmi il cuore.",
+    "fonte": "Tradizione spirituale",
+    "nota": "L’umiltà cresce nella pazienza."
+  },
+  {
+    "tema": "umiltà",
+    "messaggio": "L’umiltà è accogliere i propri limiti come luogo in cui Dio può manifestare la Sua forza.",
+    "fonte": "Lettere di Paolo (dominio pubblico), ispirazione",
+    "nota": "L’umiltà è apertura alla potenza di Dio."
+  },
+  {
+    "tema": "umiltà",
+    "messaggio": "L’umiltà è camminare con passo leggero, sapendo che tutto ciò che sei è grazia.",
+    "fonte": "San Francesco d’Assisi (dominio pubblico), ispirazione",
+    "nota": "L’umiltà è semplicità che illumina."
+  },
+  {
+    "tema": "misericordia",
+    "messaggio": "La misericordia di Dio non si stanca mai: è un abbraccio che precede ogni nostro ritorno.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "La misericordia è il primo passo di Dio verso l’uomo."
+  },
+  {
+    "tema": "misericordia",
+    "messaggio": "La misericordia non cancella la verità, ma la illumina con la tenerezza.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "La misericordia trasforma senza ferire."
+  },
+  {
+    "tema": "misericordia",
+    "messaggio": "La misericordia è un cuore che si china senza giudicare, per rialzare chi è caduto.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "La misericordia è vicinanza che solleva."
+  },
+  {
+    "tema": "misericordia",
+    "messaggio": "Dio è ricco di misericordia perché il Suo amore non conosce condizioni.",
+    "fonte": "Lettere di Paolo (dominio pubblico), ispirazione",
+    "nota": "La misericordia nasce dall’amore gratuito di Dio."
+  },
+  {
+    "tema": "misericordia",
+    "messaggio": "La misericordia è la forza mite che ricompone ciò che sembrava perduto.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "La misericordia è pace che ricostruisce."
+  },
+  {
+    "tema": "misericordia",
+    "messaggio": "La misericordia è sapere che Dio non guarda il passato, ma il desiderio di ricominciare.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La misericordia apre sempre un futuro."
+  },
+  {
+    "tema": "misericordia",
+    "messaggio": "La misericordia è un balsamo che cura le ferite più profonde senza far rumore.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "La misericordia guarisce nel silenzio."
+  },
+  {
+    "tema": "misericordia",
+    "messaggio": "Dio usa misericordia perché conosce la nostra fragilità e la ama.",
+    "fonte": "Salmo 103 (dominio pubblico), ispirazione",
+    "nota": "La misericordia nasce dalla compassione di Dio."
+  },
+  {
+    "tema": "misericordia",
+    "messaggio": "La misericordia è un dono dello Spirito che scioglie la durezza del cuore.",
+    "fonte": "Tradizione spirituale",
+    "nota": "La misericordia rende il cuore nuovo."
+  },
+  {
+    "tema": "misericordia",
+    "messaggio": "La misericordia è la mano di Dio che ci rialza più in alto di dove eravamo caduti.",
+    "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+    "nota": "La misericordia eleva."
+  },
+  {
+    "tema": "perdono",
+    "messaggio": "Il perdono nasce quando lasci che Dio tocchi la ferita senza paura di mostrarla.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "Il perdono è guarigione che inizia dalla verità."
+  },
+  {
+    "tema": "perdono",
+    "messaggio": "Perdonare non significa dimenticare, ma scegliere di non lasciare che il male abbia l’ultima parola.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "Il perdono libera il cuore dal peso del passato."
+  },
+  {
+    "tema": "perdono",
+    "messaggio": "Il perdono è un cammino lento, fatto di piccoli passi che aprono spazio alla pace.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "Il perdono cresce nella pazienza."
+  },
+  {
+    "tema": "perdono",
+    "messaggio": "Dio perdona sempre, perché il Suo amore è più grande delle nostre cadute.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "Il perdono di Dio rialza e rinnova."
+  },
+  {
+    "tema": "perdono",
+    "messaggio": "Perdonare è lasciare che la misericordia vinca la paura di essere feriti ancora.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "Il perdono nasce dalla fiducia."
+  },
+  {
+    "tema": "perdono",
+    "messaggio": "Il perdono è un dono dello Spirito che scioglie i nodi più stretti del cuore.",
+    "fonte": "Tradizione spirituale",
+    "nota": "Il perdono è libertà interiore."
+  },
+  {
+    "tema": "perdono",
+    "messaggio": "Dio perdona non perché siamo innocenti, ma perché siamo amati.",
+    "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+    "nota": "Il perdono è grazia pura."
+  },
+  {
+    "tema": "perdono",
+    "messaggio": "Il perdono è un ponte che ricostruisce ciò che sembrava irrimediabilmente spezzato.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "Il perdono è pace che ricompone."
+  },
+  {
+    "tema": "perdono",
+    "messaggio": "Perdonare è scegliere la vita, non il rancore che consuma lentamente.",
+    "fonte": "Lettere di Paolo (dominio pubblico), ispirazione",
+    "nota": "Il perdono è via di libertà."
+  },
+  {
+    "tema": "perdono",
+    "messaggio": "Il perdono è la mano di Dio che scioglie il peso che non riuscivi più a portare.",
+    "fonte": "Salmo 32 (dominio pubblico), ispirazione",
+    "nota": "Il perdono è sollievo che respira."
+  },
+  {
+    "tema": "pace",
+    "messaggio": "La pace nasce quando lasci che Dio abiti le tue inquietudini e le trasformi in fiducia.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "La pace è frutto della presenza di Dio."
+  },
+  {
+    "tema": "pace",
+    "messaggio": "La pace non è assenza di conflitti, ma un cuore che rimane saldo anche nelle tempeste.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "La pace cresce nella profondità del cuore."
+  },
+  {
+    "tema": "peace",
+    "messaggio": "La pace è un respiro che si apre quando smetti di lottare da solo e ti affidi a Dio.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "La pace è fiducia che si arrende all’amore."
+  },
+  {
+    "tema": "pace",
+    "messaggio": "Cristo dona una pace che il mondo non può togliere, perché nasce dal Suo cuore trafitto.",
+    "fonte": "Vangelo di Giovanni 14 (dominio pubblico), ispirazione",
+    "nota": "La pace di Cristo è stabile e fedele."
+  },
+  {
+    "tema": "pace",
+    "messaggio": "La pace è un dono dello Spirito che calma ciò che dentro di noi è agitato.",
+    "fonte": "Tradizione spirituale",
+    "nota": "La pace è quiete che guarisce."
+  },
+  {
+    "tema": "pace",
+    "messaggio": "La pace non si impone: fiorisce quando scegli di non rispondere al male con il male.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La pace è forza mite."
+  },
+  {
+    "tema": "pace",
+    "messaggio": "La pace è un cammino che si costruisce con piccoli gesti di bontà quotidiana.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "La pace nasce dal quotidiano vissuto con amore."
+  },
+  {
+    "tema": "pace",
+    "messaggio": "Dio dona pace a chi apre il cuore alla Sua luce, anche quando tutto sembra buio.",
+    "fonte": "Salmo 29 (dominio pubblico), ispirazione",
+    "nota": "La pace è benedizione che discende dall’alto."
+  },
+  {
+    "tema": "pace",
+    "messaggio": "La pace è riconciliazione con la propria storia, sapendo che Dio la custodisce tutta.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "La pace è accoglienza di sé."
+  },
+  {
+    "tema": "pace",
+    "messaggio": "La pace è un dono che Dio fa a chi si lascia amare senza difese.",
+    "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+    "nota": "La pace è riposo nel cuore di Dio."
+  },
+  {
+    "tema": "fiducia",
+    "messaggio": "La fiducia nasce quando lasci che Dio tenga il timone anche quando il mare è agitato.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "La fiducia è consegna, non controllo."
+  },
+  {
+    "tema": "fiducia",
+    "messaggio": "La fiducia non elimina le paure, ma permette di attraversarle senza esserne schiacciati.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "La fiducia cresce nella fragilità accolta."
+  },
+  {
+    "tema": "fiducia",
+    "messaggio": "La fiducia è un sì che si rinnova anche quando non vedi ancora la strada.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "La fiducia cammina nel buio con una piccola luce."
+  },
+  {
+    "tema": "fiducia",
+    "messaggio": "Dio merita fiducia perché non delude mai: le Sue promesse sono più solide delle nostre incertezze.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La fiducia si radica nella fedeltà di Dio."
+  },
+  {
+    "tema": "fiducia",
+    "messaggio": "La fiducia è sapere che Dio lavora nel silenzio, anche quando tutto sembra immobile.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "La fiducia riconosce l’opera nascosta di Dio."
+  },
+  {
+    "tema": "fiducia",
+    "messaggio": "La fiducia è un dono dello Spirito che scioglie l’ansia e apre il cuore alla pace.",
+    "fonte": "Tradizione spirituale",
+    "nota": "La fiducia è quiete interiore."
+  },
+  {
+    "tema": "fiducia",
+    "messaggio": "Chi confida nel Signore è come un albero piantato lungo corsi d’acqua: non teme la siccità.",
+    "fonte": "Geremia 17 (dominio pubblico), ispirazione",
+    "nota": "La fiducia rende il cuore stabile."
+  },
+  {
+    "tema": "fiducia",
+    "messaggio": "La fiducia è accettare che Dio conosce la strada anche quando tu non la vedi.",
+    "fonte": "Salmo 37 (dominio pubblico), ispirazione",
+    "nota": "La fiducia è abbandono sereno."
+  },
+  {
+    "tema": "fiducia",
+    "messaggio": "La fiducia non è ingenuità, ma la certezza che Dio trasforma ogni cosa per il bene.",
+    "fonte": "Lettere di Paolo (dominio pubblico), ispirazione",
+    "nota": "La fiducia è speranza che si affida."
+  },
+  {
+    "tema": "fiducia",
+    "messaggio": "La fiducia è lasciare che Dio apra porte che tu non riuscivi più a spingere.",
+    "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+    "nota": "La fiducia è resa che libera."
+  },
+  {
+    "tema": "luce",
+    "messaggio": "La luce di Dio non abbaglia, ma illumina con dolcezza ciò che il cuore teme di vedere.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "La luce di Dio è tenerezza che rivela."
+  },
+  {
+    "tema": "luce",
+    "messaggio": "La luce non scaccia la notte, ma la attraversa e la trasforma in un luogo abitato da Dio.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "La luce nasce spesso nel buio."
+  },
+  {
+    "tema": "luce",
+    "messaggio": "Dio accende la Sua luce nei punti più fragili, dove pensavi ci fosse solo ombra.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "La luce di Dio germoglia nelle crepe."
+  },
+  {
+    "tema": "luce",
+    "messaggio": "Cristo è la luce che non tramonta: chi Lo segue non cammina nelle tenebre.",
+    "fonte": "Vangelo di Giovanni 8 (dominio pubblico), ispirazione",
+    "nota": "La luce di Cristo guida il cammino."
+  },
+  {
+    "tema": "luce",
+    "messaggio": "La luce di Dio è un filo sottile che guida anche quando il sentiero sembra scomparire.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "La luce sostiene la speranza."
+  },
+  {
+    "tema": "luce",
+    "messaggio": "La luce non fa rumore: entra piano, come un dono che non pretende nulla.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "La luce è umiltà che illumina."
+  },
+  {
+    "tema": "luce",
+    "messaggio": "La luce del Signore rischiara il cuore e lo rende capace di vedere il bene nascosto.",
+    "fonte": "Salmo 36 (dominio pubblico), ispirazione",
+    "nota": "La luce di Dio rivela la verità."
+  },
+  {
+    "tema": "luce",
+    "messaggio": "La luce è un dono dello Spirito che scioglie le ombre interiori e apre alla pace.",
+    "fonte": "Tradizione spirituale",
+    "nota": "La luce porta quiete."
+  },
+  {
+    "tema": "luce",
+    "messaggio": "Dio illumina non solo il cammino, ma anche il cuore che lo percorre.",
+    "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+    "nota": "La luce di Dio trasforma dall’interno."
+  },
+  {
+    "tema": "luce",
+    "messaggio": "La luce è un invito a non restare fermi: mostra la strada e incoraggia a camminare.",
+    "fonte": "Lettere di Paolo (dominio pubblico), ispirazione",
+    "nota": "La luce guida verso il bene."
+  },
+  {
+    "tema": "silenzio",
+    "messaggio": "Il silenzio è il luogo dove Dio parla con una voce che non ferisce ma consola.",
+    "fonte": "Papa Francesco, parafrasi",
+    "nota": "Il silenzio apre lo spazio alla presenza di Dio."
+  },
+  {
+    "tema": "silenzio",
+    "messaggio": "Il silenzio non è vuoto, ma grembo in cui la Parola può nascere.",
+    "fonte": "Don Luigi Epicoco, parafrasi",
+    "nota": "Il silenzio custodisce la vita interiore."
+  },
+  {
+    "tema": "silenzio",
+    "messaggio": "Nel silenzio il cuore impara a distinguere ciò che conta da ciò che passa.",
+    "fonte": "Ermes Ronchi, parafrasi",
+    "nota": "Il silenzio purifica lo sguardo."
+  },
+  {
+    "tema": "silenzio",
+    "messaggio": "Dio parla nel silenzio perché solo lì il cuore smette di difendersi.",
+    "fonte": "Henri Nouwen, parafrasi",
+    "nota": "Il silenzio è incontro."
+  },
+  {
+    "tema": "silenzio",
+    "messaggio": "Il silenzio è una porta che si apre verso la pace che il mondo non può dare.",
+    "fonte": "Giovanni Paolo II, parafrasi",
+    "nota": "Il silenzio conduce alla pace interiore."
+  },
+  {
+    "tema": "silenzio",
+    "messaggio": "Nel silenzio Dio guarisce ciò che le parole non riescono a toccare.",
+    "fonte": "Tradizione monastica (dominio pubblico)",
+    "nota": "Il silenzio è balsamo per l’anima."
+  },
+  {
+    "tema": "silenzio",
+    "messaggio": "Il silenzio non è fuga, ma ritorno al centro dove Dio abita.",
+    "fonte": "Don Tonino Bello, parafrasi",
+    "nota": "Il silenzio riporta all’essenziale."
+  },
+  {
+    "tema": "silenzio",
+    "messaggio": "Nel silenzio il cuore ascolta la voce dello Spirito che guida senza forzare.",
+    "fonte": "Tradizione spirituale",
+    "nota": "Il silenzio è docilità allo Spirito."
+  },
+  {
+    "tema": "silenzio",
+    "messaggio": "Il silenzio è il linguaggio di Dio: chi lo accoglie impara a vedere con occhi nuovi.",
+    "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+    "nota": "Il silenzio apre alla contemplazione."
+  },
+  {
+    "tema": "silenzio",
+    "messaggio": "Nel silenzio scopri che Dio è più vicino di quanto pensassi.",
+    "fonte": "Salmo 46 (dominio pubblico), ispirazione",
+    "nota": "Il silenzio rivela la vicinanza di Dio."
+  },
+  {
+      "tema": "preghiera",
+      "messaggio": "La preghiera è il luogo dove il cuore si lascia guardare da Dio senza paura.",
+      "fonte": "Papa Francesco, parafrasi",
+      "nota": "La preghiera è relazione, non rito."
+    },
+    {
+      "tema": "preghiera",
+      "messaggio": "Pregare non è dire molte parole, ma lasciare che Dio pronunci il tuo nome.",
+      "fonte": "Don Luigi Epicoco, parafrasi",
+      "nota": "La preghiera è ascolto."
+    },
+    {
+      "tema": "preghiera",
+      "messaggio": "La preghiera è un respiro che unisce la tua fragilità alla forza di Dio.",
+      "fonte": "Ermes Ronchi, parafrasi",
+      "nota": "La preghiera sostiene il cammino."
+    },
+    {
+      "tema": "preghiera",
+      "messaggio": "Nella preghiera il cuore trova pace perché si scopre amato senza condizioni.",
+      "fonte": "Henri Nouwen, parafrasi",
+      "nota": "La preghiera guarisce."
+    },
+    {
+      "tema": "preghiera",
+      "messaggio": "La preghiera è un dialogo silenzioso in cui Dio parla attraverso la Sua presenza.",
+      "fonte": "Tradizione spirituale",
+      "nota": "La preghiera è comunione."
+    },
+    {
+      "tema": "preghiera",
+      "messaggio": "La preghiera non cambia Dio, ma cambia il cuore che si apre alla Sua volontà.",
+      "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+      "nota": "La preghiera trasforma."
+    },
+    {
+      "tema": "preghiera",
+      "messaggio": "La preghiera è un filo di luce che attraversa anche le notti più lunghe.",
+      "fonte": "Don Tonino Bello, parafrasi",
+      "nota": "La preghiera illumina."
+    },
+    {
+      "tema": "preghiera",
+      "messaggio": "Chi prega non è mai solo: lo Spirito intercede anche quando mancano le parole.",
+      "fonte": "Lettere di Paolo (dominio pubblico), ispirazione",
+      "nota": "La preghiera è sostegno dello Spirito."
+    },
+    {
+      "tema": "preghiera",
+      "messaggio": "La preghiera è un rifugio dove il cuore trova riposo e riprende forza.",
+      "fonte": "Salmo 62 (dominio pubblico), ispirazione",
+      "nota": "La preghiera dà pace."
+    },
+    {
+      "tema": "preghiera",
+      "messaggio": "La preghiera è un atto di fiducia: consegni a Dio ciò che non riesci più a portare.",
+      "fonte": "Giovanni Paolo II, parafrasi",
+      "nota": "La preghiera è abbandono sereno."
+    },
+    {
+        "tema": "interiorità",
+        "messaggio": "L’interiorità è il luogo dove Dio ti attende senza fretta, per parlarti con dolcezza.",
+        "fonte": "Papa Francesco, parafrasi",
+        "nota": "L’interiorità è incontro silenzioso."
+      },
+      {
+        "tema": "interiorità",
+        "messaggio": "L’interiorità non è fuga dal mondo, ma ritorno al centro dove tutto trova senso.",
+        "fonte": "Don Luigi Epicoco, parafrasi",
+        "nota": "L’interiorità riordina il cuore."
+      },
+      {
+        "tema": "interiorità",
+        "messaggio": "L’interiorità è uno spazio sacro dove il cuore impara a riconoscere la voce di Dio.",
+        "fonte": "Ermes Ronchi, parafrasi",
+        "nota": "L’interiorità è ascolto profondo."
+      },
+      {
+        "tema": "interiorità",
+        "messaggio": "L’interiorità è un cammino verso la verità di te stesso, illuminato dalla grazia.",
+        "fonte": "Sant’Agostino (dominio pubblico), ispirazione",
+        "nota": "L’interiorità è verità abitata."
+      },
+      {
+        "tema": "interiorità",
+        "messaggio": "Nell’interiorità scopri che Dio non è lontano, ma più vicino del tuo stesso respiro.",
+        "fonte": "Henri Nouwen, parafrasi",
+        "nota": "L’interiorità rivela la vicinanza di Dio."
+      },
+      {
+        "tema": "interiorità",
+        "messaggio": "L’interiorità è un giardino nascosto che cresce quando scegli il silenzio e la cura.",
+        "fonte": "Tradizione spirituale",
+        "nota": "L’interiorità richiede custodia."
+      },
+      {
+        "tema": "interiorità",
+        "messaggio": "L’interiorità è un luogo di pace dove il cuore smette di inseguire e comincia a essere.",
+        "fonte": "Giovanni Paolo II, parafrasi",
+        "nota": "L’interiorità è pace che nasce dentro."
+      },
+      {
+        "tema": "interiorità",
+        "messaggio": "L’interiorità è una porta che si apre quando smetti di giudicarti e ti lasci guardare da Dio.",
+        "fonte": "Don Tonino Bello, parafrasi",
+        "nota": "L’interiorità è accoglienza di sé."
+      },
+      {
+        "tema": "interiorità",
+        "messaggio": "L’interiorità è un dono dello Spirito che ti guida verso ciò che è essenziale.",
+        "fonte": "Tradizione spirituale",
+        "nota": "L’interiorità è discernimento."
+      },
+      {
+        "tema": "interiorità",
+        "messaggio": "L’interiorità è il luogo dove impari a vedere con gli occhi di Dio.",
+        "fonte": "Salmo 139 (dominio pubblico), ispirazione",
+        "nota": "L’interiorità è sguardo rinnovato."
+      }
+    ]
