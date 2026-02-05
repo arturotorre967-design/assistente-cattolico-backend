@@ -747,7 +747,8 @@ Scrivi una risposta che:
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": context_prompt}
         ],
-        "temperature": 0.6,
+        "temperature": 0.9,
+        "top-p": 0.95
         "max_tokens": 600
     }
 
