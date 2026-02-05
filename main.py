@@ -678,6 +678,8 @@ def quality_filter(text: str, fonte: str):
 # MOTORE AI (FASE B - GROQ + LLAMA 3.1)
 # -----------------------------
 
+import random
+
 def generate_ai_answer(question: str):
     tema = classify_tema(question)
     messaggi = get_messages_by_tema(tema)
@@ -689,9 +691,8 @@ def generate_ai_answer(question: str):
         print("NESSUN MESSAGGIO TROVATO — ENTRA NEL FALLBACK")
         return generate_supervised_answer_v5(question)
 
-    # ... resto della funzione ...
-
-    m = messaggi[0]
+    # 🔥 RANDOMIZZAZIONE DEL CORPUS
+    m = random.choice(messaggi)
 
     system_prompt = (
         "Sei un assistente spirituale cattolico. "
@@ -741,14 +742,15 @@ Scrivi una risposta che:
         "Content-Type": "application/json"
     }
 
+    # 🔥 PARAMETRI AI MIGLIORATI
     body = {
         "model": GROQ_MODEL,
         "messages": [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": context_prompt}
         ],
-        "temperature": 0.9,
-        "top-p": 0.95
+        "temperature": 0.9,   # più creatività
+        "top_p": 0.95,        # più varietà
         "max_tokens": 600
     }
 
@@ -772,19 +774,6 @@ Scrivi una risposta che:
     except Exception as e:
         print("ERRORE GROQ:", e)
         return generate_supervised_answer_v5(question)
-
-# -----------------------------
-# MODELLI
-# -----------------------------
-
-class AskRequest(BaseModel):
-    question: str
-
-class SpiritualAnswer(BaseModel):
-    answer: str
-    source: str
-    explanation: str
-    category: str
 
 # -----------------------------
 # REGOLE DI RISPOSTA (RAPIDE)
