@@ -749,8 +749,8 @@ Scrivi una risposta che:
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": context_prompt}
         ],
-        "temperature": 0.9,   # più creatività
-        "top_p": 0.95,        # più varietà
+        "temperature": 0.9,
+        "top_p": 0.95,
         "max_tokens": 600
     }
 
@@ -774,6 +774,69 @@ Scrivi una risposta che:
     except Exception as e:
         print("ERRORE GROQ:", e)
         return generate_supervised_answer_v5(question)
+
+
+# -----------------------------
+# FUNZIONE DI FUSIONE IBRIDA
+# -----------------------------
+
+def fuse_answers(rule_answer: str, ai_answer: str, question: str):
+    fusion_prompt = f"""
+L'utente ha chiesto:
+{question}
+
+Risposta del motore a regole:
+{rule_answer}
+
+Risposta del motore AI:
+{ai_answer}
+
+Unisci le due risposte in un unico testo contemplativo, breve, mite, luminoso.
+- Mantieni solo ciò che è coerente con la spiritualità cattolica.
+- Evita ripetizioni.
+- Non aggiungere dottrina nuova.
+- Non introdurre citazioni non presenti.
+- Usa frasi brevi, essenziali, come un soffio di luce.
+- Tono: contemplativo, fraterno, silenzioso.
+- Lunghezza: 8–12 frasi.
+"""
+
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    body = {
+        "model": GROQ_MODEL,
+        "messages": [
+            {"role": "system", "content": "Sei un assistente spirituale cattolico."},
+            {"role": "user", "content": fusion_prompt}
+        ],
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "max_tokens": 500
+    }
+
+    response = requests.post(GROQ_API_URL, headers=headers, json=body)
+    data = response.json()
+    return data["choices"][0]["message"]["content"].strip()
+
+
+# -----------------------------
+# MOTORE IBRIDO COMPLETO
+# -----------------------------
+
+def generate_hybrid_answer(question: str):
+    rule = generate_supervised_answer_v5(question)
+    ai = generate_ai_answer(question)
+    fused = fuse_answers(rule["answer"], ai["answer"], question)
+
+    return {
+        "answer": fused,
+        "source": ai["source"],
+        "explanation": ai["explanation"],
+        "category": ai["category"]
+    }
 
 # -----------------------------
 # REGOLE DI RISPOSTA (RAPIDE)
@@ -900,6 +963,20 @@ rules = [
         "category": "Senso della vita"
     }
 ]
+# -----------------------------
+# ENDPOINT MOTORE IBRIDO
+# -----------------------------
+
+@app.post("/api/ask-hybrid", response_model=SpiritualAnswer)
+async def ask_hybrid(request: AskRequest):
+    result = generate_hybrid_answer(request.question)
+    return SpiritualAnswer(
+        answer=result["answer"],
+        source=result["source"],
+        explanation=result["explanation"],
+        category=result["category"]
+    )
+
 # -----------------------------
 # ENDPOINT PRINCIPALE (REGOLE RAPIDE)
 # -----------------------------
