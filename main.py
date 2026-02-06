@@ -821,7 +821,6 @@ Unisci le due risposte in un unico testo contemplativo, breve, mite, luminoso.
     data = response.json()
     return data["choices"][0]["message"]["content"].strip()
 
-
 # -----------------------------
 # MOTORE IBRIDO COMPLETO
 # -----------------------------
