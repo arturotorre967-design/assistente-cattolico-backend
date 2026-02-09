@@ -679,7 +679,6 @@ def quality_filter(text: str, fonte: str):
 # -----------------------------
 
 import random
-
 def generate_ai_answer(question: str):
     tema = classify_tema(question)
     messaggi = get_messages_by_tema(tema)
@@ -820,6 +819,7 @@ Unisci le due risposte in un unico testo contemplativo, breve, mite, luminoso.
     response = requests.post(GROQ_API_URL, headers=headers, json=body)
     data = response.json()
     return data["choices"][0]["message"]["content"].strip()
+
 
 # -----------------------------
 # MOTORE IBRIDO COMPLETO
