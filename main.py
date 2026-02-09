@@ -962,19 +962,29 @@ rules = [
         "category": "Senso della vita"
     }
 ]
+
 # -----------------------------
-# ENDPOINT MOTORE IBRIDO
+# ENDPOINT MOTORE IBRIDO (CRASH-SAFE)
 # -----------------------------
 
 @app.post("/api/ask-hybrid", response_model=SpiritualAnswer)
 async def ask_hybrid(request: AskRequest):
-    result = generate_hybrid_answer(request.question)
-    return SpiritualAnswer(
-        answer=result["answer"],
-        source=result["source"],
-        explanation=result["explanation"],
-        category=result["category"]
-    )
+    try:
+        result = generate_hybrid_answer(request.question)
+        return SpiritualAnswer(
+            answer=result["answer"],
+            source=result["source"],
+            explanation=result["explanation"],
+            category=result["category"]
+        )
+    except Exception as e:
+        print("ERRORE NEL MOTORE IBRIDO:", e)
+        return SpiritualAnswer(
+            answer="In questo momento non riesco a generare una risposta ibrida.",
+            source="Sistema",
+            explanation="Errore interno nel motore ibrido",
+            category="Errore"
+        )
 
 # -----------------------------
 # ENDPOINT PRINCIPALE (REGOLE RAPIDE)
