@@ -14,6 +14,19 @@ load_dotenv()  # <-- Questa riga carica il file .env
 app = FastAPI()
 
 # -----------------------------
+# CACHE IN RAM
+# -----------------------------
+cache = {}
+
+def get_cached_answer(question: str):
+    """Restituisce una risposta dalla cache se esiste."""
+    return cache.get(question)
+
+def save_to_cache(question: str, answer: dict):
+    """Salva una risposta nella cache."""
+    cache[question] = answer
+
+# -----------------------------
 # MODELLI Pydantic (CORRETTI)
 # -----------------------------
 
@@ -819,20 +832,34 @@ Unisci le due risposte in un unico testo contemplativo, breve, mite, luminoso.
 
 
 # -----------------------------
-# MOTORE IBRIDO COMPLETO
+# MOTORE IBRIDO COMPLETO (con cache)
 # -----------------------------
 
 def generate_hybrid_answer(question: str):
+    # 1️⃣ Controllo cache
+    cached = get_cached_answer(question)
+    if cached:
+        print("⚡ CACHE HIT — risposta immediata")
+        return cached
+
+    print("🧠 CACHE MISS — generazione nuova risposta")
+
+    # 2️⃣ Generazione completa
     rule = generate_supervised_answer_v5(question)
     ai = generate_ai_answer(question)
     fused = fuse_answers(rule["answer"], ai["answer"], question)
 
-    return {
+    result = {
         "answer": fused,
         "source": ai["source"],
         "explanation": ai["explanation"],
         "category": ai["category"]
     }
+
+    # 3️⃣ Salvataggio in cache
+    save_to_cache(question, result)
+
+    return result
 
 # -----------------------------
 # REGOLE DI RISPOSTA (RAPIDE)
