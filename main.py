@@ -384,9 +384,10 @@ che aiuti la persona a percepire la vicinanza di Dio.
 # ENDPOINT UNICO /risposta
 # -----------------------------
 
-@app.post("/risposta", response_model=RispostaFinale)
-def risposta_unica(payload: RispostaRequest):
-    domanda = payload.domanda
+@app.post("/risposta", response_model=SpiritualAnswer)
+def risposta_unica(payload: AskRequest):
+    # AskRequest ha il campo "question"
+    domanda = payload.question
 
     # 1️⃣ Classificazione del tema
     tema = classify_tema(domanda)
@@ -437,7 +438,7 @@ Puoi variare liberamente stile, immagini, metafore e struttura.
 Usa un linguaggio poetico, simbolico e meditativo, ricco di immagini spirituali e contemplative.
 """
 
-    # 8️⃣ USER MESSAGE (il tuo prompt maestro, IDENTICO)
+    # 8️⃣ USER MESSAGE (prompt maestro)
     user_message = f"""
 Sei un assistente spirituale cattolico. Rispondi con tono caldo, fraterno, paterno e contemplativo.
 La tua risposta deve SEMPRE contenere:
@@ -468,7 +469,7 @@ Domanda dell’utente:
 Genera una risposta spirituale profonda, coerente, cattolica, creativa, varia, non ripetitiva, senza ripetizioni inutili e piena di immagini spirituali.
 """
 
-    # 9️⃣ Chiamata a Groq (temperature 1.3 ATTIVA)
+    # 9️⃣ Chiamata a Groq
     headers = {
         "Authorization": f"Bearer {GROQ_API_KEY}",
         "Content-Type": "application/json"
@@ -493,22 +494,20 @@ Genera una risposta spirituale profonda, coerente, cattolica, creativa, varia, n
         groq_json = groq_response.json()
     except Exception as e:
         print("❌ Errore nel parsing JSON:", e)
-        return RispostaFinale(
-            risposta="Errore nella generazione della risposta spirituale.",
-            tema=tema,
-            messaggio=versetto,
-            fonte="Errore interno",
-            nota=frase_santo
+        return SpiritualAnswer(
+            answer="Errore nella generazione della risposta spirituale.",
+            source="Errore interno",
+            explanation=frase_santo,
+            category=tema
         )
 
     if "choices" not in groq_json:
         print("❌ Nessun campo 'choices' nella risposta Groq:", groq_json)
-        return RispostaFinale(
-            risposta="Errore nella generazione della risposta spirituale.",
-            tema=tema,
-            messaggio=versetto,
-            fonte="Errore interno",
-            nota=frase_santo
+        return SpiritualAnswer(
+            answer="Errore nella generazione della risposta spirituale.",
+            source="Errore interno",
+            explanation=frase_santo,
+            category=tema
         )
 
     risposta_groq = groq_json["choices"][0]["message"]["content"]
@@ -516,13 +515,12 @@ Genera una risposta spirituale profonda, coerente, cattolica, creativa, varia, n
     # 1️⃣1️⃣ Fonte completa (Bibbia + Liturgia + Santo)
     fonte_completa = f"Bibbia: {versetto}; Liturgia del giorno: {versetto_liturgico}; Santo: {frase_santo}"
 
-    # 1️⃣2️⃣ Risposta finale
-    return RispostaFinale(
-        risposta=risposta_groq.strip(),
-        tema=tema,
-        messaggio=versetto,
-        fonte=fonte_completa,
-        nota=frase_santo
+    # 1️⃣2️⃣ Risposta finale nel nuovo modello
+    return SpiritualAnswer(
+        answer=risposta_groq.strip(),
+        source=fonte_completa,
+        explanation=frase_santo,
+        category=tema
     )
 
 # -----------------------------
