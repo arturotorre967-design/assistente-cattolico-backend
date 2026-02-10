@@ -832,33 +832,148 @@ Unisci le due risposte in un unico testo contemplativo, breve, mite, luminoso.
 
 
 # -----------------------------
-# MOTORE IBRIDO COMPLETO (con cache)
+# MOTORE IBRIDO COMPLETO (AI controllata)
 # -----------------------------
 
 def generate_hybrid_answer(question: str):
-    # 1️⃣ Controllo cache
+    # 1️⃣ CACHE
     cached = get_cached_answer(question)
     if cached:
         print("⚡ CACHE HIT — risposta immediata")
         return cached
 
-    print("🧠 CACHE MISS — generazione nuova risposta")
+    print("🧠 CACHE MISS — generazione nuova risposta IBRIDA CONTROLLATA")
 
-    # 2️⃣ Generazione completa
-    rule = generate_supervised_answer_v5(question)
-    ai = generate_ai_answer(question)
-    fused = fuse_answers(rule["answer"], ai["answer"], question)
+    # 2️⃣ PILASTRI CATTOLICI (deterministici)
+    tema = classify_tema(question)
+    versetto, frase_santo = recupera_citazioni(tema)
 
-    result = {
-        "answer": fused,
-        "source": ai["source"],
-        "explanation": ai["explanation"],
-        "category": ai["category"]
+    lit = liturgia_del_giorno()
+    lettura = lit["lettura"]
+    tema_liturgico = lit["tema"]
+    versetto_liturgico = lit["versetto_chiave"]
+
+    emozione = "non_specificata"
+    bisogno = "non_specificato"
+    intensita = "media"
+    blend_toni = "40% fraterno, 40% paterno, 20% contemplativo"
+
+    # 3️⃣ SYSTEM MESSAGE — RECINTO DOTTRINALE
+    system_message = """
+Sei un assistente spirituale cattolico fedele al Magistero della Chiesa.
+Devi:
+- rimanere sempre entro la dottrina cattolica
+- non inventare mai citazioni bibliche o dei santi
+- non contraddire mai il Catechismo della Chiesa Cattolica
+- non fare teologia creativa o speculativa
+- non dare consigli morali contrari alla Chiesa
+
+Tono:
+- caldo, fraterno, paterno, contemplativo
+- rispettoso, umile, mai giudicante
+- linguaggio semplice ma profondo
+
+Struttura OBBLIGATORIA della risposta (rispetta esattamente queste sezioni):
+
+1) Una riga iniziale che riassume il cuore del messaggio.
+2) Sezione: "📖 RIFERIMENTO BIBLICO / SPIRITUALE"
+   - Usa il versetto principale fornito dal sistema.
+   - Puoi aggiungere UNA sola breve frase di commento.
+3) Sezione: "🏛️ ALTRE LUCI DELLA TRADIZIONE"
+   - Puoi citare al massimo 1-2 altri riferimenti (Bibbia, Padri, Santi, Magistero).
+   - Se non sei sicuro, resta sul generico senza inventare riferimenti precisi.
+4) Sezione: "🧭 PASSO CONCRETO"
+   - Un solo gesto concreto, semplice, realistico, fattibile oggi.
+5) Sezione: "🙏 PREGHIERA FINALE"
+   - Una breve preghiera rivolta a Dio, in seconda persona ("Signore...").
+6) Una breve parte contemplativa finale (massimo 6-8 righe), poetica ma sobria.
+
+Regole:
+- Non ripetere le stesse frasi identiche in ogni risposta.
+- Non usare formule stereotipate sempre uguali.
+- Non usare mai “cara fratello”: usa “caro fratello”, “cara sorella” o “caro amico” se il genere non è chiaro.
+- Zero errori grammaticali.
+"""
+
+    # 4️⃣ USER MESSAGE — CONTESTO COMPLETO
+    user_message = f"""
+Domanda dell'utente:
+{question}
+
+Informazioni per costruire la risposta:
+- Tema classificato: {tema}
+- Versetto biblico principale: {versetto}
+- Frase di un Santo: {frase_santo}
+- Lettura liturgica del giorno: {lettura}
+- Tema liturgico: {tema_liturgico}
+- Versetto liturgico chiave: {versetto_liturgico}
+- Emozione percepita: {emozione}
+- Bisogno spirituale: {bisogno}
+- Intensità emotiva: {intensita}
+- Blend dei toni: {blend_toni}
+
+Istruzioni:
+- Usa il versetto principale come asse portante.
+- Se non sei sicuro di un riferimento, non inventarlo.
+- Collega con delicatezza la domanda dell'utente al Vangelo e alla Tradizione.
+- Mantieni la struttura obbligatoria indicata nel system message.
+"""
+
+    # 5️⃣ CHIAMATA A GROQ
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json"
     }
 
-    # 3️⃣ Salvataggio in cache
-    save_to_cache(question, result)
+    body = {
+        "model": GROQ_MODEL,
+        "temperature": 1.0,  # controllata, non troppo alta
+        "messages": [
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": user_message}
+        ]
+    }
 
+    groq_response = requests.post(GROQ_API_URL, headers=headers, json=body)
+    print("📨 RISPOSTA GREZZA GROQ (IBRIDO):", groq_response.text)
+
+    try:
+        groq_json = groq_response.json()
+    except Exception as e:
+        print("❌ Errore nel parsing JSON (ibrido):", e)
+        result = {
+            "answer": "Si è verificato un errore nella generazione della risposta spirituale.",
+            "source": "Errore interno",
+            "explanation": frase_santo,
+            "category": tema
+        }
+        save_to_cache(question, result)
+        return result
+
+    if "choices" not in groq_json:
+        print("❌ Nessun campo 'choices' nella risposta Groq (ibrido):", groq_json)
+        result = {
+            "answer": "Si è verificato un errore nella generazione della risposta spirituale.",
+            "source": "Errore interno",
+            "explanation": frase_santo,
+            "category": tema
+        }
+        save_to_cache(question, result)
+        return result
+
+    risposta_groq = groq_json["choices"][0]["message"]["content"]
+
+    fonte_completa = f"Bibbia: {versetto}; Liturgia del giorno: {versetto_liturgico}; Santo: {frase_santo}"
+
+    result = {
+        "answer": risposta_groq.strip(),
+        "source": fonte_completa,
+        "explanation": frase_santo,
+        "category": tema
+    }
+
+    # 6️⃣ SALVATAGGIO IN CACHE
+    save_to_cache(question, result)
     return result
 
 # -----------------------------
