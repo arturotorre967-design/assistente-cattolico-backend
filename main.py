@@ -14,18 +14,17 @@ load_dotenv()  # <-- Questa riga carica il file .env
 app = FastAPI()
 
 # -----------------------------
-# MODELLI Pydantic (NUOVI)
+# MODELLI Pydantic (CORRETTI)
 # -----------------------------
 
-class RispostaRequest(BaseModel):
-    domanda: str
+class AskRequest(BaseModel):
+    question: str
 
-class RispostaFinale(BaseModel):
-    risposta: str
-    tema: str
-    messaggio: str
-    fonte: Optional[str] = None
-    nota: Optional[str] = None
+class SpiritualAnswer(BaseModel):
+    answer: str
+    source: str
+    explanation: str
+    category: str
 
 # -----------------------------
 # TEST LETTURA CHIAVE GROQ
