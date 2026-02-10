@@ -685,65 +685,53 @@ def quality_filter(text: str, fonte: str):
     return text
 
 # -----------------------------
-# MOTORE AI (FASE B - GROQ + LLAMA 3.1)
+# MOTORE AI PURO (con recinto cattolico)
 # -----------------------------
 
-import random
 def generate_ai_answer(question: str):
-    tema = classify_tema(question)
-    messaggi = get_messages_by_tema(tema)
+    print("🧠 Generazione RISPOSTA AI (motore contemplativo controllato)")
 
-    print("TEMA CLASSIFICATO:", tema)
-    print("MESSAGGI TROVATI:", messaggi)
+    system_message = """
+Sei un assistente spirituale cattolico fedele al Magistero.
+Non inventare mai citazioni bibliche o dei santi.
+Non contraddire mai il Catechismo.
+Non dare consigli morali contrari alla Chiesa.
+Non fare teologia creativa o speculativa.
 
-    if not messaggi:
-        print("NESSUN MESSAGGIO TROVATO — ENTRA NEL FALLBACK")
-        return generate_supervised_answer_v5(question)
+Tono:
+- contemplativo, poetico, caldo, paterno
+- profondo ma semplice
+- mai giudicante
+- mai rigido
+- mai ripetitivo
 
-    # 🔥 RANDOMIZZAZIONE DEL CORPUS
-    m = random.choice(messaggi)
+Struttura OBBLIGATORIA della risposta AI:
 
-    system_prompt = (
-        "Sei un assistente spirituale cattolico. "
-        "Parli con tono contemplativo, lento, mite, luminoso, come chi accompagna un’anima nel silenzio. "
-        "Non fai psicologia, non analizzi emozioni, non dai consigli tecnici o terapeutici. "
-        "Non inventi dottrina, non aggiungi citazioni non fornite, non introduci nuovi testi biblici. "
-        "Usi solo il messaggio, la nota e la fonte che ti vengono dati. "
-        "La tua risposta deve essere una rielaborazione poetica e contemplativa del messaggio, della nota e della fonte, "
-        "senza aggiungere contenuti nuovi né introdurre idee non presenti. "
-        "Ogni frase deve essere breve, essenziale, come un soffio di luce. "
-        "Evita moralismi, ammonizioni, giudizi, spiegazioni complesse. "
-        "Parla come un fratello che siede accanto, non come un professore. "
-        "Usa immagini semplici: luce, silenzio, respiro, cammino, mano di Dio. "
-        "Ogni frase deve portare pace, non informazioni. "
-        "Non ripetere il corpus parola per parola: rielaboralo con delicatezza. "
-        "Scrivi 8–12 frasi, senza elenchi, senza sezioni, senza emoji."
-    )
+1) Una frase iniziale che riassume il cuore spirituale.
+2) Una breve meditazione (6–10 righe) che:
+   - parte dalla domanda dell’utente
+   - usa immagini bibliche generiche (luce, cammino, acqua viva…)
+   - NON cita versetti specifici
+   - NON usa riferimenti numerati (niente “Giovanni 3,16”)
+3) Un invito concreto alla preghiera o a un gesto spirituale.
+4) Una preghiera finale breve, rivolta a Dio.
 
-    context_prompt = f"""
-Utente:
+Regole:
+- Non usare la stessa preghiera finale ogni volta.
+- Non usare la stessa frase iniziale ogni volta.
+- Non usare sezioni dell’ibrido (niente “Riferimento biblico”, “Altre luci”, ecc.).
+- Zero errori grammaticali.
+"""
+
+    user_message = f"""
+Domanda dell'utente:
 {question}
 
-Tema principale (classificato): {m['tema']}
-
-Messaggio dal corpus:
-{m['messaggio']}
-
-Nota spirituale/teologica:
-{m['nota']}
-
-Fonte biblica/spirituale:
-{m['fonte']}
-
-Scrivi una risposta che:
-- accolga il vissuto dell'utente con delicatezza
-- riprenda il contenuto del messaggio e della nota
-- faccia riferimento alla fonte in modo semplice (senza tecnicismi)
-- mantenga un tono contemplativo, lento, luminoso
-- resti breve ma denso (8–12 frasi)
-- NON inserisca nuove citazioni o dottrina non presenti sopra
-- NON dia consigli psicologici, ma solo spirituali
-- non usi elenco puntato, ma un unico testo continuo
+Istruzioni:
+- Rispondi con una meditazione cattolica profonda.
+- Non citare versetti specifici.
+- Non usare la struttura dell’ibrido.
+- Mantieni la struttura obbligatoria indicata nel system message.
 """
 
     headers = {
@@ -751,39 +739,31 @@ Scrivi una risposta che:
         "Content-Type": "application/json"
     }
 
-    # 🔥 PARAMETRI AI MIGLIORATI
     body = {
         "model": GROQ_MODEL,
+        "temperature": 1.15,  # più creativa dell’ibrido
         "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": context_prompt}
-        ],
-        "temperature": 0.9,
-        "top_p": 0.95,
-        "max_tokens": 600
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": user_message}
+        ]
     }
 
+    groq_response = requests.post(GROQ_API_URL, headers=headers, json=body)
+    print("📨 RISPOSTA GREZZA GROQ (AI):", groq_response.text)
+
     try:
-        response = requests.post(GROQ_API_URL, headers=headers, json=body, timeout=20)
-        print("STATUS CODE:", response.status_code)
-        print("RAW RESPONSE:", response.text)
-        response.raise_for_status()
-        data = response.json()
+        groq_json = groq_response.json()
+        risposta = groq_json["choices"][0]["message"]["content"].strip()
+    except:
+        risposta = "Non riesco a generare una risposta in questo momento, ma Dio è vicino a te."
 
-        ai_text = data["choices"][0]["message"]["content"].strip()
-        ai_text = quality_filter(ai_text, m["fonte"])
-
-        return {
-            "answer": ai_text,
-            "source": m["fonte"],
-            "explanation": m["nota"],
-            "category": m["tema"]
-        }
-
-    except Exception as e:
-        print("ERRORE GROQ:", e)
-        return generate_supervised_answer_v5(question)
-
+    # Il motore AI non usa fonti specifiche
+    return {
+        "answer": risposta,
+        "source": "AI-contemplativa",
+        "explanation": "",
+        "category": "meditativa"
+    }
 
 # -----------------------------
 # FUNZIONE DI FUSIONE IBRIDA
