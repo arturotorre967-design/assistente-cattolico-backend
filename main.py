@@ -1106,7 +1106,7 @@ async def ask_hybrid(request: AskRequest):
         )
 
 # -----------------------------
-# ENDPOINT PRINCIPALE (REGOLE RAPIDE CON VARIETÀ)
+# ENDPOINT PRINCIPALE (MOTORE INTERNO CON VARIETÀ MASSIMA)
 # -----------------------------
 
 import random
@@ -1115,80 +1115,155 @@ import random
 async def ask_question(request: AskRequest):
     question = request.question.lower()
 
-    # Dizionario delle varianti per categoria
-    varianti = {
+    # ============================
+    # 1) CONTENUTI PER TEMA
+    # ============================
+
+    contenuti = {
         "Consolazione": {
             "frasi": [
-                "Non temere, Dio è con te.",
-                "Il Signore cammina accanto a te anche nelle ombre.",
-                "La tua paura non è più grande dell’amore di Dio.",
-                "Dio custodisce il tuo cuore anche quando vacilla.",
-                "La luce di Dio non si spegne nelle notti difficili."
+                "Non temere: Dio posa una luce silenziosa sul tuo cuore.",
+                "Il Signore cammina accanto a te anche quando tutto trema.",
+                "La paura non è più forte della presenza di Dio.",
+                "Dio sostiene il tuo cuore quando si sente fragile.",
+                "Il timore si placa quando lasci spazio alla fiducia.",
+                "Dio è vicino, anche quando non lo senti.",
+                "La tua paura è un’ombra, ma Dio è una luce che non si spegne.",
+                "Il Signore ti accompagna passo dopo passo.",
+                "Dio custodisce ciò che temi di perdere.",
+                "La pace di Dio può raggiungerti anche ora."
             ],
-            "versetti": [
-                "Isaia 41,10",
-                "Salmo 27,1",
-                "Salmo 23,1-4"
+            "immagini": [
+                "come una lampada accesa nella notte",
+                "come un filo di luce che attraversa il cuore",
+                "come un vento leggero che porta pace",
+                "come una mano che ti sostiene nel silenzio",
+                "come un raggio che apre un varco nell’ombra"
+            ],
+            "promesse": [
+                "Dio non ti lascia solo nel timore.",
+                "La Sua presenza è più forte delle tue paure.",
+                "Il Signore ti guida anche quando non vedi la strada.",
+                "Dio è con te in ogni passo.",
+                "La Sua pace può raggiungerti anche ora."
             ],
             "commenti": [
-                "Lascia che questa promessa ti dia pace.",
-                "Accogli questa luce nel tuo cuore.",
-                "Queste parole sono per te, oggi."
-            ]
+                "Lascia che questa parola ti dia respiro.",
+                "Accogli questa luce nel cuore.",
+                "Questa promessa è per te.",
+                "Dio ti accompagna in ciò che vivi.",
+                "Questa verità può portare pace."
+            ],
+            "versetti": ["Isaia 41,10", "Salmo 27,1", "Salmo 23,1-4"]
         },
+
         "Fede": {
             "frasi": [
-                "La fede cresce quando la chiediamo a Dio.",
-                "Dio rafforza il cuore di chi si affida a Lui.",
-                "La fede nasce dall’ascolto e dalla fiducia.",
-                "Il Signore sostiene chi desidera credere.",
-                "La fede è un dono che Dio ama donare."
+                "La fede cresce nel silenzio e nella fiducia.",
+                "Dio sostiene chi desidera credere.",
+                "La fede illumina ciò che non comprendiamo.",
+                "La fiducia apre strade che non vedevamo.",
+                "La fede è un seme che Dio fa crescere.",
+                "Credere è lasciare spazio alla luce.",
+                "La fede nasce dall’ascolto del cuore.",
+                "Dio rafforza chi si affida a Lui.",
+                "La fede è un passo verso la pace.",
+                "Dio accoglie anche la tua piccola fede."
             ],
-            "versetti": [
-                "Marco 9,24",
-                "Romani 10,17",
-                "Ebrei 11,1"
+            "immagini": [
+                "come una lampada che rischiara il cammino",
+                "come un seme che cresce nel silenzio",
+                "come un ruscello che porta vita",
+                "come un filo che ti unisce a Dio",
+                "come un’alba che dissolve la notte"
+            ],
+            "promesse": [
+                "Dio non abbandona chi lo cerca.",
+                "La Sua fedeltà è più forte dei tuoi dubbi.",
+                "Il Signore accoglie la tua fede, anche fragile.",
+                "Dio cammina con chi desidera credere.",
+                "La Sua luce non viene meno."
             ],
             "commenti": [
-                "Accogli questa parola come un seme di luce.",
-                "Lascia che questa promessa ti accompagni.",
-                "Questa verità può guidarti oggi."
-            ]
+                "Accogli questa parola come un seme.",
+                "Lascia che questa verità ti accompagni.",
+                "Questa luce può guidarti oggi.",
+                "Dio parla anche nel silenzio.",
+                "Questa promessa è per te."
+            ],
+            "versetti": ["Marco 9,24", "Romani 10,17", "Ebrei 11,1"]
         },
+
         "Speranza": {
             "frasi": [
                 "La speranza non delude.",
-                "Dio apre sempre una strada.",
+                "Dio apre strade anche dove non le vedi.",
                 "La luce di Dio vince ogni oscurità.",
                 "La speranza è un dono che rinnova il cuore.",
-                "Dio è fedele anche quando tutto sembra fermo."
+                "Dio è fedele anche quando tutto sembra fermo.",
+                "La speranza è un respiro che rialza.",
+                "Dio accende una luce anche nei giorni pesanti.",
+                "La speranza nasce dalla fiducia.",
+                "Dio non smette di operare nel silenzio.",
+                "La speranza è più forte della stanchezza."
             ],
-            "versetti": [
-                "Romani 5,5",
-                "Geremia 29,11",
-                "Salmo 37,5"
+            "immagini": [
+                "come un’alba che ritorna",
+                "come un seme che rompe la terra",
+                "come un raggio che attraversa le nuvole",
+                "come una brezza che porta sollievo",
+                "come una porta che si apre lentamente"
+            ],
+            "promesse": [
+                "Dio prepara per te un cammino.",
+                "La Sua fedeltà non viene meno.",
+                "Il Signore opera anche quando non te ne accorgi.",
+                "Dio rialza chi spera in Lui.",
+                "La Sua luce ti precede."
             ],
             "commenti": [
                 "Lascia che questa promessa ti rialzi.",
-                "Questa parola può essere la tua forza oggi.",
-                "Accogli questa luce nel tuo cammino."
-            ]
+                "Questa parola può essere la tua forza.",
+                "Accogli questa luce nel cuore.",
+                "Dio è vicino a chi spera.",
+                "Questa verità può guidarti."
+            ],
+            "versetti": ["Romani 5,5", "Geremia 29,11", "Salmo 37,5"]
         }
     }
 
-    # 1️⃣ Cerca una regola che corrisponde
+    # ============================
+    # 2) CERCA UNA REGOLA CHE MATCHA
+    # ============================
+
     for rule in rules:
         if any(keyword in question for keyword in rule["keywords"]):
 
             categoria = rule["category"]
-            if categoria in varianti:
-                blocco = varianti[categoria]
+
+            if categoria in contenuti:
+                blocco = contenuti[categoria]
 
                 frase = random.choice(blocco["frasi"])
-                versetto = random.choice(blocco["versetti"])
+                immagine = random.choice(blocco["immagini"])
+                promessa = random.choice(blocco["promesse"])
                 commento = random.choice(blocco["commenti"])
+                versetto = random.choice(blocco["versetti"])
 
-                risposta = f"{frase}\n\n📖 {versetto}\n{commento}"
+                # ============================
+                # 3) STRUTTURE ALTERNATIVE
+                # ============================
+
+                struttura = random.choice(["A", "B", "C"])
+
+                if struttura == "A":
+                    risposta = f"{frase}\n\n📖 {versetto}\n{commento}"
+
+                elif struttura == "B":
+                    risposta = f"{frase}\n{immagine}\n\n📖 {versetto}"
+
+                else:  # Struttura C
+                    risposta = f"{frase}\n\n📖 {versetto}\n{promessa}\n{commento}"
 
                 return SpiritualAnswer(
                     answer=risposta,
@@ -1197,7 +1272,7 @@ async def ask_question(request: AskRequest):
                     category=categoria
                 )
 
-            # fallback se non ci sono varianti
+            # fallback se non ci sono contenuti
             return SpiritualAnswer(
                 answer=rule["answer"],
                 source=rule["source"],
@@ -1205,7 +1280,10 @@ async def ask_question(request: AskRequest):
                 category=rule["category"]
             )
 
-    # 2️⃣ Risposta generica con varietà
+    # ============================
+    # 4) FALLBACK GENERALE
+    # ============================
+
     fallback_frasi = [
         "Cerca prima il Regno di Dio.",
         "Dio guida chi si affida a Lui.",
@@ -1214,15 +1292,11 @@ async def ask_question(request: AskRequest):
         "Chi confida nel Signore trova pace."
     ]
 
-    fallback_versetti = [
-        "Matteo 6,33",
-        "Salmo 37,5",
-        "Proverbi 3,5"
-    ]
+    fallback_versetti = ["Matteo 6,33", "Salmo 37,5", "Proverbi 3,5"]
 
     fallback_commenti = [
         "Lascia che questa parola ti accompagni oggi.",
-        "Accogli questa luce nel tuo cuore.",
+        "Accogli questa luce nel cuore.",
         "Questa promessa è per te."
     ]
 
