@@ -1106,15 +1106,98 @@ async def ask_hybrid(request: AskRequest):
         )
 
 # -----------------------------
-# ENDPOINT PRINCIPALE (REGOLE RAPIDE)
+# ENDPOINT PRINCIPALE (REGOLE RAPIDE CON VARIETÀ)
 # -----------------------------
+
+import random
 
 @app.post("/api/ask", response_model=SpiritualAnswer)
 async def ask_question(request: AskRequest):
     question = request.question.lower()
 
+    # Dizionario delle varianti per categoria
+    varianti = {
+        "Consolazione": {
+            "frasi": [
+                "Non temere, Dio è con te.",
+                "Il Signore cammina accanto a te anche nelle ombre.",
+                "La tua paura non è più grande dell’amore di Dio.",
+                "Dio custodisce il tuo cuore anche quando vacilla.",
+                "La luce di Dio non si spegne nelle notti difficili."
+            ],
+            "versetti": [
+                "Isaia 41,10",
+                "Salmo 27,1",
+                "Salmo 23,1-4"
+            ],
+            "commenti": [
+                "Lascia che questa promessa ti dia pace.",
+                "Accogli questa luce nel tuo cuore.",
+                "Queste parole sono per te, oggi."
+            ]
+        },
+        "Fede": {
+            "frasi": [
+                "La fede cresce quando la chiediamo a Dio.",
+                "Dio rafforza il cuore di chi si affida a Lui.",
+                "La fede nasce dall’ascolto e dalla fiducia.",
+                "Il Signore sostiene chi desidera credere.",
+                "La fede è un dono che Dio ama donare."
+            ],
+            "versetti": [
+                "Marco 9,24",
+                "Romani 10,17",
+                "Ebrei 11,1"
+            ],
+            "commenti": [
+                "Accogli questa parola come un seme di luce.",
+                "Lascia che questa promessa ti accompagni.",
+                "Questa verità può guidarti oggi."
+            ]
+        },
+        "Speranza": {
+            "frasi": [
+                "La speranza non delude.",
+                "Dio apre sempre una strada.",
+                "La luce di Dio vince ogni oscurità.",
+                "La speranza è un dono che rinnova il cuore.",
+                "Dio è fedele anche quando tutto sembra fermo."
+            ],
+            "versetti": [
+                "Romani 5,5",
+                "Geremia 29,11",
+                "Salmo 37,5"
+            ],
+            "commenti": [
+                "Lascia che questa promessa ti rialzi.",
+                "Questa parola può essere la tua forza oggi.",
+                "Accogli questa luce nel tuo cammino."
+            ]
+        }
+    }
+
+    # 1️⃣ Cerca una regola che corrisponde
     for rule in rules:
         if any(keyword in question for keyword in rule["keywords"]):
+
+            categoria = rule["category"]
+            if categoria in varianti:
+                blocco = varianti[categoria]
+
+                frase = random.choice(blocco["frasi"])
+                versetto = random.choice(blocco["versetti"])
+                commento = random.choice(blocco["commenti"])
+
+                risposta = f"{frase}\n\n📖 {versetto}\n{commento}"
+
+                return SpiritualAnswer(
+                    answer=risposta,
+                    source=versetto,
+                    explanation=commento,
+                    category=categoria
+                )
+
+            # fallback se non ci sono varianti
             return SpiritualAnswer(
                 answer=rule["answer"],
                 source=rule["source"],
@@ -1122,10 +1205,37 @@ async def ask_question(request: AskRequest):
                 category=rule["category"]
             )
 
+    # 2️⃣ Risposta generica con varietà
+    fallback_frasi = [
+        "Cerca prima il Regno di Dio.",
+        "Dio guida chi si affida a Lui.",
+        "Il Signore illumina il cammino di chi lo cerca.",
+        "Dio parla nel silenzio del cuore.",
+        "Chi confida nel Signore trova pace."
+    ]
+
+    fallback_versetti = [
+        "Matteo 6,33",
+        "Salmo 37,5",
+        "Proverbi 3,5"
+    ]
+
+    fallback_commenti = [
+        "Lascia che questa parola ti accompagni oggi.",
+        "Accogli questa luce nel tuo cuore.",
+        "Questa promessa è per te."
+    ]
+
+    risposta = (
+        f"{random.choice(fallback_frasi)}\n\n"
+        f"📖 {random.choice(fallback_versetti)}\n"
+        f"{random.choice(fallback_commenti)}"
+    )
+
     return SpiritualAnswer(
-        answer="Cerca prima il Regno di Dio.",
-        source="Matteo 6,33",
-        explanation="Dio guida chi si affida a Lui.",
+        answer=risposta,
+        source="Motore interno",
+        explanation="Varietà sintetica",
         category="Generale"
     )
 
