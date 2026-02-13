@@ -1309,7 +1309,7 @@ async def ask_question(request: AskRequest):
                     answer=risposta,
                     source=versetto,
                     explanation=commento,
-                    category=categoria
+                    category=categoria,
                     sourceLiturgical=liturgia_del_giorno()["versetto_chiave"]
                 )
 
@@ -1318,7 +1318,7 @@ async def ask_question(request: AskRequest):
                 answer=rule["answer"],
                 source=rule["source"],
                 explanation=rule["explanation"],
-                category=rule["category"]
+                category=rule["category"],
                 sourceLiturgical=liturgia_del_giorno()["versetto_chiave"]
             )
 
@@ -1352,7 +1352,7 @@ async def ask_question(request: AskRequest):
         answer=risposta,
         source="Motore interno",
         explanation="Varietà sintetica",
-        category="Generale"
+        category="Generale",
         sourceLiturgical=liturgia_del_giorno()["versetto_chiave"]
     )
 
@@ -1398,6 +1398,6 @@ async def ask_ai(request: AskRequest):
         answer=result["answer"],
         source=result["source"],
         explanation=result["explanation"],
-        category=result["category"]
+        category=result["category"],
         sourceLiturgical=liturgia_del_giorno()["versetto_chiave"]
     )
