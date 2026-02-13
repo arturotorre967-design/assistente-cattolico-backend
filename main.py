@@ -1,3 +1,4 @@
+from datetime import datetime
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional
@@ -25,6 +26,84 @@ def get_cached_answer(question: str):
 def save_to_cache(question: str, answer: dict):
     """Salva una risposta nella cache."""
     cache[question] = answer
+    
+# -----------------------------
+# FUNZIONE LITURGIA DEL GIORNO
+# -----------------------------
+from datetime import datetime
+
+def liturgia_del_giorno():
+    # Giorno della settimana (0 = lunedì, 6 = domenica)
+    giorno = datetime.now().weekday()
+
+    # Mini-liturgia settimanale (puoi ampliarla quando vuoi)
+    liturgia = [
+        {
+            "versetto_chiave": "Beati i poveri in spirito, perché di essi è il regno dei cieli",
+            "riferimento": "Matteo 5,3",
+            "prima_lettura": "Giacomo 1,1-11",
+            "salmo_responsoriale": "Salmo 118",
+            "vangelo": "Matteo 5,1-12",
+            "antifona": "Il Signore è vicino a chi ha il cuore ferito",
+            "colore_liturgico": "Verde"
+        },
+        {
+            "versetto_chiave": "Il Signore è il mio pastore: non manco di nulla",
+            "riferimento": "Salmo 23",
+            "prima_lettura": "Isaia 55,6-11",
+            "salmo_responsoriale": "Salmo 33",
+            "vangelo": "Matteo 6,7-15",
+            "antifona": "Il Signore guida i suoi fedeli",
+            "colore_liturgico": "Verde"
+        },
+        {
+            "versetto_chiave": "Io sono la via, la verità e la vita",
+            "riferimento": "Giovanni 14,6",
+            "prima_lettura": "Atti 4,1-12",
+            "salmo_responsoriale": "Salmo 117",
+            "vangelo": "Giovanni 14,1-6",
+            "antifona": "Cristo è la nostra luce",
+            "colore_liturgico": "Bianco"
+        },
+        {
+            "versetto_chiave": "Signore, da chi andremo? Tu hai parole di vita eterna",
+            "riferimento": "Giovanni 6,68",
+            "prima_lettura": "Geremia 17,5-10",
+            "salmo_responsoriale": "Salmo 1",
+            "vangelo": "Luca 6,17-26",
+            "antifona": "Beato chi confida nel Signore",
+            "colore_liturgico": "Verde"
+        },
+        {
+            "versetto_chiave": "Il Signore è vicino a chi lo invoca",
+            "riferimento": "Salmo 145",
+            "prima_lettura": "Isaia 58,1-9",
+            "salmo_responsoriale": "Salmo 50",
+            "vangelo": "Matteo 9,14-15",
+            "antifona": "Ricordati di noi, Signore",
+            "colore_liturgico": "Viola"
+        },
+        {
+            "versetto_chiave": "Chi rimane in me e io in lui porta molto frutto",
+            "riferimento": "Giovanni 15,5",
+            "prima_lettura": "Atti 9,31-42",
+            "salmo_responsoriale": "Salmo 115",
+            "vangelo": "Giovanni 15,1-8",
+            "antifona": "Rimanete nel mio amore",
+            "colore_liturgico": "Bianco"
+        },
+        {
+            "versetto_chiave": "Questo è il mio Figlio prediletto: ascoltatelo",
+            "riferimento": "Marco 9,7",
+            "prima_lettura": "Genesi 22,1-18",
+            "salmo_responsoriale": "Salmo 115",
+            "vangelo": "Marco 9,2-10",
+            "antifona": "Cristo è la nostra gloria",
+            "colore_liturgico": "Bianco"
+        }
+    ]
+
+    return liturgia[giorno]
 
 # -----------------------------
 # MODELLI Pydantic (CORRETTI)
@@ -1401,3 +1480,23 @@ async def ask_ai(request: AskRequest):
         category=result["category"],
         sourceLiturgical=liturgia_del_giorno()["versetto_chiave"]
     )
+
+# -----------------------------
+# ENDPOINT LITURGIA DEL GIORNO
+# -----------------------------
+
+@app.get("/liturgia-del-giorno")
+def liturgia_del_giorno_endpoint():
+    lit = liturgia_del_giorno()
+
+    return {
+        "data_server": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "giorno_settimana": datetime.now().strftime("%A"),
+        "versetto_chiave": lit.get("versetto_chiave"),
+        "riferimento": lit.get("riferimento"),
+        "prima_lettura": lit.get("prima_lettura"),
+        "salmo_responsoriale": lit.get("salmo_responsoriale"),
+        "vangelo": lit.get("vangelo"),
+        "antifona": lit.get("antifona"),
+        "colore_liturgico": lit.get("colore_liturgico")
+    }
