@@ -254,7 +254,7 @@ liturgia = {
 import random
 
 def liturgia_del_giorno():
-    giorno = datetime.datetime.now().strftime("%A").lower()
+    giorno = datetime.now().strftime("%A").lower()
 
     mapping = {
         "monday": "lunedi",
