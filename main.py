@@ -117,6 +117,7 @@ class SpiritualAnswer(BaseModel):
     source: str
     explanation: str
     category: str
+    sourceLiturgical: Optional[str] = None
 
 # -----------------------------
 # TEST LETTURA CHIAVE GROQ
