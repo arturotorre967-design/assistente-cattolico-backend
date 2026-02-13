@@ -251,7 +251,6 @@ liturgia = {
     }
 }
 
-import datetime
 import random
 
 def liturgia_del_giorno():
