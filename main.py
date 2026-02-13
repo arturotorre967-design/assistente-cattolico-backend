@@ -1132,7 +1132,8 @@ async def ask_hybrid(request: AskRequest):
             answer=result["answer"],
             source=result["source"],
             explanation=result["explanation"],
-            category=result["category"]
+            category=result["category"],
+            sourceLiturgical=liturgia_del_giorno()["versetto_chiave"]
         )
     except Exception as e:
         print("ERRORE NEL MOTORE IBRIDO:", e)
@@ -1140,7 +1141,8 @@ async def ask_hybrid(request: AskRequest):
             answer="In questo momento non riesco a generare una risposta ibrida.",
             source="Sistema",
             explanation="Errore interno nel motore ibrido",
-            category="Errore"
+            category="Errore",
+            sourceLiturgical=liturgia_del_giorno()["versetto_chiave"]
         )
 
 # -----------------------------
@@ -1308,6 +1310,7 @@ async def ask_question(request: AskRequest):
                     source=versetto,
                     explanation=commento,
                     category=categoria
+                    sourceLiturgical=liturgia_del_giorno()["versetto_chiave"]
                 )
 
             # fallback se non ci sono contenuti
@@ -1316,6 +1319,7 @@ async def ask_question(request: AskRequest):
                 source=rule["source"],
                 explanation=rule["explanation"],
                 category=rule["category"]
+                sourceLiturgical=liturgia_del_giorno()["versetto_chiave"]
             )
 
     # ============================
@@ -1349,6 +1353,7 @@ async def ask_question(request: AskRequest):
         source="Motore interno",
         explanation="Varietà sintetica",
         category="Generale"
+        sourceLiturgical=liturgia_del_giorno()["versetto_chiave"]
     )
 
 # -----------------------------
@@ -1394,4 +1399,5 @@ async def ask_ai(request: AskRequest):
         source=result["source"],
         explanation=result["explanation"],
         category=result["category"]
+        sourceLiturgical=liturgia_del_giorno()["versetto_chiave"]
     )
