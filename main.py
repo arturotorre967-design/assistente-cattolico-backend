@@ -1392,22 +1392,22 @@ async def ask_ai(request: AskRequest):
 def liturgia_del_giorno_endpoint():
     lit = liturgia_del_giorno()
 
-return {
-    "data_server": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    "giorno_settimana": datetime.now().strftime("%A"),
+    return {
+        "data_server": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "giorno_settimana": datetime.now().strftime("%A"),
 
-    "versetto_chiave": lit.get("versetto_chiave"),
-    "riferimento": lit.get("riferimento"),
+        "versetto_chiave": lit.get("versetto_chiave"),
+        "riferimento": lit.get("riferimento"),
 
-    "prima_lettura": lit.get("prima_lettura"),
-    "prima_lettura_testo": lit.get("prima_lettura_testo"),
+        "prima_lettura": lit.get("prima_lettura"),
+        "prima_lettura_testo": lit.get("prima_lettura_testo"),
 
-    "salmo_responsoriale": lit.get("salmo_responsoriale"),
-    "salmo_responsoriale_testo": lit.get("salmo_responsoriale_testo"),
+        "salmo_responsoriale": lit.get("salmo_responsoriale"),
+        "salmo_responsoriale_testo": lit.get("salmo_responsoriale_testo"),
 
-    "vangelo": lit.get("vangelo"),
-    "vangelo_testo": lit.get("vangelo_testo"),
+        "vangelo": lit.get("vangelo"),
+        "vangelo_testo": lit.get("vangelo_testo"),
 
-    "antifona": lit.get("antifona"),
-    "colore_liturgico": lit.get("colore_liturgico")
-}
+        "antifona": lit.get("antifona"),
+        "colore_liturgico": lit.get("colore_liturgico")
+    }
