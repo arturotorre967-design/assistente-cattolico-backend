@@ -1388,26 +1388,32 @@ async def ask_ai(request: AskRequest):
 # ENDPOINT LITURGIA DEL GIORNO
 # -----------------------------
 
-@app.get("/liturgia-del-giorno")
-def liturgia_del_giorno_endpoint():
-    lit = liturgia_del_giorno()
+import requests
 
-    return {
-        "data_server": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "giorno_settimana": datetime.now().strftime("%A"),
+def liturgia_del_giorno():
+    try:
+        response = requests.get("https://api.liturgia.app/v1/today")
+        data = response.json()
 
-        "versetto_chiave": lit.get("versetto_chiave"),
-        "riferimento": lit.get("riferimento"),
+        readings = data.get("readings", {})
 
-        "prima_lettura": lit.get("prima_lettura"),
-        "prima_lettura_testo": lit.get("prima_lettura_testo"),
+        return {
+            "versetto_chiave": readings.get("gospel", {}).get("text", "").split("\n")[0],
+            "riferimento": readings.get("gospel", {}).get("reference"),
 
-        "salmo_responsoriale": lit.get("salmo_responsoriale"),
-        "salmo_responsoriale_testo": lit.get("salmo_responsoriale_testo"),
+            "prima_lettura": readings.get("first_reading", {}).get("reference"),
+            "prima_lettura_testo": readings.get("first_reading", {}).get("text"),
 
-        "vangelo": lit.get("vangelo"),
-        "vangelo_testo": lit.get("vangelo_testo"),
+            "salmo_responsoriale": readings.get("psalm", {}).get("reference"),
+            "salmo_responsoriale_testo": readings.get("psalm", {}).get("text"),
 
-        "antifona": lit.get("antifona"),
-        "colore_liturgico": lit.get("colore_liturgico")
-    }
+            "vangelo": readings.get("gospel", {}).get("reference"),
+            "vangelo_testo": readings.get("gospel", {}).get("text"),
+
+            "antifona": data.get("antiphon"),
+            "colore_liturgico": data.get("liturgical_color")
+        }
+
+    except Exception as e:
+        print("Errore API liturgica:", e)
+        return {}
