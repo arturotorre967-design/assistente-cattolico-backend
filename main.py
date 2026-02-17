@@ -1388,37 +1388,44 @@ async def ask_ai(request: AskRequest):
 # ENDPOINT LITURGIA DEL GIORNO
 # -----------------------------
 
-import requests
-
 def liturgia_del_giorno():
     try:
-        response = requests.get("https://api.liturgia.app/v1/today")
+        response = requests.get("https://api.liturgia.app/v1/today", timeout=10)
         data = response.json()
-
         readings = data.get("readings", {})
 
         return {
-            "versetto_chiave": readings.get("gospel", {}).get("text", "").split("\n")[0],
-            "riferimento": readings.get("gospel", {}).get("reference"),
+            "versetto_chiave": readings.get("gospel", {}).get("text", "").split("\n")[0] if readings.get("gospel") else "Il Signore è la mia luce e la mia salvezza",
+            "riferimento": readings.get("gospel", {}).get("reference") or "Salmo 27",
 
-            "prima_lettura": readings.get("first_reading", {}).get("reference"),
-            "prima_lettura_testo": readings.get("first_reading", {}).get("text"),
+            "prima_lettura": readings.get("first_reading", {}).get("reference") or "Isaia 55,1-11",
+            "prima_lettura_testo": readings.get("first_reading", {}).get("text") or "O voi tutti assetati, venite all’acqua...",
 
-            "salmo_responsoriale": readings.get("psalm", {}).get("reference"),
-            "salmo_responsoriale_testo": readings.get("psalm", {}).get("text"),
+            "salmo_responsoriale": readings.get("psalm", {}).get("reference") or "Salmo 22",
+            "salmo_responsoriale_testo": readings.get("psalm", {}).get("text") or "Il Signore è il mio pastore: non manco di nulla.",
 
-            "vangelo": readings.get("gospel", {}).get("reference"),
-            "vangelo_testo": readings.get("gospel", {}).get("text"),
+            "vangelo": readings.get("gospel", {}).get("reference") or "Marco 1,1-8",
+            "vangelo_testo": readings.get("gospel", {}).get("text") or "Inizio del vangelo di Gesù Cristo, Figlio di Dio...",
 
-            "antifona": data.get("antiphon"),
-            "colore_liturgico": data.get("liturgical_color")
+            "antifona": data.get("antiphon") or "Oggi la salvezza è venuta in questa casa.",
+            "colore_liturgico": data.get("liturgical_color") or "Verde"
         }
 
     except Exception as e:
         print("Errore API liturgica:", e)
-        return {}
+        return {
+            "versetto_chiave": "Il Signore è la mia luce e la mia salvezza",
+            "riferimento": "Salmo 27",
 
-# ⭐ AGGIUNGERE QUESTO BLOCCO ⭐
-@app.get("/liturgia-del-giorno")
-async def get_liturgia_del_giorno():
-    return liturgia_del_giorno()
+            "prima_lettura": "Isaia 55,1-11",
+            "prima_lettura_testo": "O voi tutti assetati, venite all’acqua...",
+
+            "salmo_responsoriale": "Salmo 22",
+            "salmo_responsoriale_testo": "Il Signore è il mio pastore: non manco di nulla.",
+
+            "vangelo": "Marco 1,1-8",
+            "vangelo_testo": "Inizio del vangelo di Gesù Cristo, Figlio di Dio...",
+
+            "antifona": "Oggi la salvezza è venuta in questa casa.",
+            "colore_liturgico": "Verde"
+        }
