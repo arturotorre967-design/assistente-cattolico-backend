@@ -1389,7 +1389,7 @@ async def ask_ai(request: AskRequest):
 # -----------------------------
 
 import requests
-import datetime
+from bs4 import BeautifulSoup
 
 def fallback_liturgia():
     return {
@@ -1412,45 +1412,65 @@ def fallback_liturgia():
 
 def liturgia_del_giorno():
     try:
-        today = datetime.date.today().strftime("%Y-%m-%d")
-        url = f"https://www.chiesacattolica.it/wp-json/liturgia/v1/giorno?data={today}"
-
+        url = "https://liturgiadelgiorno.chiesacattolica.it"
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-            "Accept": "application/json, text/plain, */*",
-            "Accept-Language": "it-IT,it;q=0.9",
-            "Referer": "https://www.chiesacattolica.it/liturgia-del-giorno/",
-            "Origin": "https://www.chiesacattolica.it",
-            "Connection": "keep-alive"
+            "User-Agent": "Mozilla/5.0",
+            "Accept-Language": "it-IT,it;q=0.9"
         }
 
         response = requests.get(url, headers=headers, timeout=10)
-        data = response.json()
+        soup = BeautifulSoup(response.text, "lxml")
 
-        print("DEBUG CEI:", data)
+        # -----------------------------
+        # ESTRAZIONE DEI CONTENUTI CEI
+        # -----------------------------
 
-        if not isinstance(data, dict) or "vangelo" not in data:
-            return fallback_liturgia()
+        # Titolo della celebrazione
+        titolo = soup.find("h2", class_="titolo-celebrazione")
+        titolo = titolo.get_text(strip=True) if titolo else None
+
+        # Prima lettura
+        prima_lettura = soup.find("div", id="prima-lettura")
+        prima_lettura_testo = prima_lettura.get_text("\n", strip=True) if prima_lettura else None
+
+        # Salmo responsoriale
+        salmo = soup.find("div", id="salmo-responsoriale")
+        salmo_testo = salmo.get_text("\n", strip=True) if salmo else None
+
+        # Seconda lettura (se presente)
+        seconda_lettura = soup.find("div", id="seconda-lettura")
+        seconda_lettura_testo = seconda_lettura.get_text("\n", strip=True) if seconda_lettura else None
+
+        # Vangelo
+        vangelo = soup.find("div", id="vangelo")
+        vangelo_testo = vangelo.get_text("\n", strip=True) if vangelo else None
+
+        # Antifona d’ingresso
+        antifona_ingresso = soup.find("div", id="antifona-ingresso")
+        antifona_ingresso = antifona_ingresso.get_text("\n", strip=True) if antifona_ingresso else None
+
+        # Colore liturgico
+        colore = soup.find("span", class_="colore")
+        colore = colore.get_text(strip=True) if colore else None
+
+        # Versetto chiave = prima riga del Vangelo
+        versetto_chiave = None
+        if vangelo_testo:
+            versetto_chiave = vangelo_testo.split("\n")[0]
 
         return {
-            "versetto_chiave": data["vangelo"]["testo"].split("\n")[0],
-            "riferimento": data["vangelo"]["riferimento"],
-
-            "prima_lettura": data["prima_lettura"]["riferimento"],
-            "prima_lettura_testo": data["prima_lettura"]["testo"],
-
-            "salmo_responsoriale": data["salmo"]["riferimento"],
-            "salmo_responsoriale_testo": data["salmo"]["testo"],
-
-            "vangelo": data["vangelo"]["riferimento"],
-            "vangelo_testo": data["vangelo"]["testo"],
-
-            "antifona": data.get("antifona_ingresso"),
-            "colore_liturgico": data.get("colore")
+            "titolo": titolo,
+            "versetto_chiave": versetto_chiave,
+            "prima_lettura_testo": prima_lettura_testo,
+            "salmo_responsoriale_testo": salmo_testo,
+            "seconda_lettura_testo": seconda_lettura_testo,
+            "vangelo_testo": vangelo_testo,
+            "antifona": antifona_ingresso,
+            "colore_liturgico": colore
         }
 
     except Exception as e:
-        print("Errore API CEI:", e)
+        print("Errore scraping CEI:", e)
         return fallback_liturgia()
 
 
