@@ -3,4 +3,7 @@ uvicorn
 pydantic
 requests
 python-dotenv
+beautifulsoup4
+lxml
+
 
