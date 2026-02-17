@@ -1388,6 +1388,8 @@ async def ask_ai(request: AskRequest):
 # ENDPOINT LITURGIA DEL GIORNO
 # -----------------------------
 
+import requests
+
 def liturgia_del_giorno():
     try:
         response = requests.get("https://api.liturgia.app/v1/today", timeout=10)
@@ -1416,16 +1418,17 @@ def liturgia_del_giorno():
         return {
             "versetto_chiave": "Il Signore è la mia luce e la mia salvezza",
             "riferimento": "Salmo 27",
-
             "prima_lettura": "Isaia 55,1-11",
             "prima_lettura_testo": "O voi tutti assetati, venite all’acqua...",
-
             "salmo_responsoriale": "Salmo 22",
             "salmo_responsoriale_testo": "Il Signore è il mio pastore: non manco di nulla.",
-
             "vangelo": "Marco 1,1-8",
             "vangelo_testo": "Inizio del vangelo di Gesù Cristo, Figlio di Dio...",
-
             "antifona": "Oggi la salvezza è venuta in questa casa.",
             "colore_liturgico": "Verde"
         }
+
+# ⭐ ROUTE MANCANTE — AGGIUNTA QUI ⭐
+@app.get("/liturgia-del-giorno")
+async def get_liturgia_del_giorno():
+    return liturgia_del_giorno()
