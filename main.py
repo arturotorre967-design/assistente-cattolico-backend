@@ -1416,8 +1416,12 @@ def liturgia_del_giorno():
         url = f"https://www.chiesacattolica.it/wp-json/liturgia/v1/giorno?data={today}"
 
         headers = {
-            "User-Agent": "Mozilla/5.0",
-            "Accept": "application/json"
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Language": "it-IT,it;q=0.9",
+            "Referer": "https://www.chiesacattolica.it/liturgia-del-giorno/",
+            "Origin": "https://www.chiesacattolica.it",
+            "Connection": "keep-alive"
         }
 
         response = requests.get(url, headers=headers, timeout=10)
