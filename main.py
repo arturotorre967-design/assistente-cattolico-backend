@@ -1417,3 +1417,8 @@ def liturgia_del_giorno():
     except Exception as e:
         print("Errore API liturgica:", e)
         return {}
+
+# ⭐ AGGIUNGERE QUESTO BLOCCO ⭐
+@app.get("/liturgia-del-giorno")
+async def get_liturgia_del_giorno():
+    return liturgia_del_giorno()
