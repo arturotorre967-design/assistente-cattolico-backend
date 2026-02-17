@@ -1412,10 +1412,7 @@ def fallback_liturgia():
 
 def liturgia_del_giorno():
     try:
-        # 📅 Data di oggi in formato CEI
         today = datetime.date.today().strftime("%Y-%m-%d")
-
-        # 🔵 API CEI (non documentata ma stabile)
         url = f"https://www.chiesacattolica.it/wp-json/liturgia/v1/giorno?data={today}"
 
         headers = {
@@ -1426,9 +1423,8 @@ def liturgia_del_giorno():
         response = requests.get(url, headers=headers, timeout=10)
         data = response.json()
 
-        print("DEBUG CEI:", data)  # 🔵 utile per capire cosa arriva
+        print("DEBUG CEI:", data)
 
-        # Se la CEI non risponde correttamente → fallback
         if not isinstance(data, dict) or "vangelo" not in data:
             return fallback_liturgia()
 
@@ -1454,7 +1450,6 @@ def liturgia_del_giorno():
         return fallback_liturgia()
 
 
-# ⭐ ROUTE PUBBLICA ⭐
 @app.get("/liturgia-del-giorno")
 async def get_liturgia_del_giorno():
     return liturgia_del_giorno()
