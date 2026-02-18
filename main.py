@@ -1412,7 +1412,7 @@ def fallback_liturgia():
 
 def liturgia_del_giorno():
     try:
-        url = "https://liturgiadelgiorno.chiesacattolica.it"
+        url = "https://rough-cell-7f6f.arturo-torre967.workers.dev"
         headers = {
             "User-Agent": "Mozilla/5.0",
             "Accept-Language": "it-IT,it;q=0.9"
