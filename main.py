@@ -1391,88 +1391,114 @@ async def ask_ai(request: AskRequest):
 import requests
 from bs4 import BeautifulSoup
 
+PROXY_CEI_URL = "https://rough-cell-7f6f.arturo-torre967.workers.dev"
+
+
 def fallback_liturgia():
     return {
+        "titolo": "Liturgia del giorno",
         "versetto_chiave": "Il Signore è la mia luce e la mia salvezza",
-        "riferimento": "Salmo 27",
-
-        "prima_lettura": "Isaia 55,1-11",
-        "prima_lettura_testo": "O voi tutti assetati, venite all’acqua...",
-
-        "salmo_responsoriale": "Salmo 22",
-        "salmo_responsoriale_testo": "Il Signore è il mio pastore: non manco di nulla.",
-
-        "vangelo": "Marco 1,1-8",
-        "vangelo_testo": "Inizio del vangelo di Gesù Cristo, Figlio di Dio...",
-
-        "antifona": "Oggi la salvezza è venuta in questa casa.",
-        "colore_liturgico": "Verde"
+        "prima_lettura_testo": None,
+        "salmo_responsoriale_testo": None,
+        "seconda_lettura_testo": None,
+        "vangelo_testo": None,
+        "antifona": None,
+        "colore_liturgico": None,
     }
 
 
 def liturgia_del_giorno():
     try:
-        url = "https://rough-cell-7f6f.arturo-torre967.workers.dev"
-        headers = {
-            "User-Agent": "Mozilla/5.0",
-            "Accept-Language": "it-IT,it;q=0.9"
-        }
-
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(
+            PROXY_CEI_URL,
+            headers={
+                "User-Agent": "Mozilla/5.0",
+                "Accept-Language": "it-IT,it;q=0.9",
+            },
+            timeout=15,
+        )
+        response.raise_for_status()
         soup = BeautifulSoup(response.text, "lxml")
 
-        # -----------------------------
-        # ESTRAZIONE DEI CONTENUTI CEI
-        # -----------------------------
+        # --- TITOLO / CELEBRAZIONE / COLORE ---
 
-        # Titolo della celebrazione
-        titolo = soup.find("h2", class_="titolo-celebrazione")
-        titolo = titolo.get_text(strip=True) if titolo else None
+        data_estesa = soup.find("span", class_="cci-data-estesa-liturgia")
+        data_estesa = data_estesa.get_text(strip=True) if data_estesa else None
 
-        # Prima lettura
-        prima_lettura = soup.find("div", id="prima-lettura")
-        prima_lettura_testo = prima_lettura.get_text("\n", strip=True) if prima_lettura else None
+        celebrazione = soup.find("h3", class_="cci_content_single_title_new")
+        celebrazione = celebrazione.get_text(strip=True) if celebrazione else None
 
-        # Salmo responsoriale
-        salmo = soup.find("div", id="salmo-responsoriale")
-        salmo_testo = salmo.get_text("\n", strip=True) if salmo else None
+        colore_div = soup.find("div", class_="cci-colore-liturgico_new")
+        colore = None
+        if colore_div:
+            span = colore_div.find("span", class_="text-capitalize")
+            if span:
+                colore = span.get_text(strip=True)
 
-        # Seconda lettura (se presente)
-        seconda_lettura = soup.find("div", id="seconda-lettura")
-        seconda_lettura_testo = seconda_lettura.get_text("\n", strip=True) if seconda_lettura else None
+        # --- SEZIONI (Antifona, Prima Lettura, Salmo, Vangelo, ecc.) ---
 
-        # Vangelo
-        vangelo = soup.find("div", id="vangelo")
-        vangelo_testo = vangelo.get_text("\n", strip=True) if vangelo else None
+        sezioni = soup.find_all("div", class_="cci-liturgia-giorno-dettagli-content")
 
-        # Antifona d’ingresso
-        antifona_ingresso = soup.find("div", id="antifona-ingresso")
-        antifona_ingresso = antifona_ingresso.get_text("\n", strip=True) if antifona_ingresso else None
+        antifona_ingresso = None
+        prima_lettura_testo = None
+        salmo_testo = None
+        seconda_lettura_testo = None
+        vangelo_testo = None
+        antifona_comunione = None
 
-        # Colore liturgico
-        colore = soup.find("span", class_="colore")
-        colore = colore.get_text(strip=True) if colore else None
+        def estrai_testo(div_content):
+            if not div_content:
+                return None
+            # Unifica tutto il testo, mantenendo i <br> come newline
+            for br in div_content.find_all("br"):
+                br.replace_with("\n")
+            text = div_content.get_text("\n", strip=True)
+            return text
 
-        # Versetto chiave = prima riga del Vangelo
+        for sezione in sezioni:
+            titolo_el = sezione.find("h2", class_="cci-liturgia-giorno-section-title")
+            if not titolo_el:
+                continue
+
+            titolo = titolo_el.get_text(strip=True)
+
+            content_div = sezione.find("div", class_="cci-liturgia-giorno-section-content")
+            testo = estrai_testo(content_div)
+
+            if titolo.lower().startswith("antifona") and "comunione" not in titolo.lower():
+                antifona_ingresso = testo
+            elif titolo.lower().startswith("prima lettura"):
+                prima_lettura_testo = testo
+            elif titolo.lower().startswith("salmo responsoriale"):
+                salmo_testo = testo
+            elif titolo.lower().startswith("seconda lettura"):
+                seconda_lettura_testo = testo
+            elif titolo.lower().startswith("vangelo"):
+                vangelo_testo = testo
+            elif "antifona alla comunione" in titolo.lower():
+                antifona_comunione = testo
+
+        # Versetto chiave: prima riga del Vangelo, se presente
         versetto_chiave = None
         if vangelo_testo:
             versetto_chiave = vangelo_testo.split("\n")[0]
 
         return {
-            "titolo": titolo,
+            "titolo": celebrazione or "Messa del Giorno",
+            "data": data_estesa,
             "versetto_chiave": versetto_chiave,
             "prima_lettura_testo": prima_lettura_testo,
             "salmo_responsoriale_testo": salmo_testo,
             "seconda_lettura_testo": seconda_lettura_testo,
             "vangelo_testo": vangelo_testo,
             "antifona": antifona_ingresso,
-            "colore_liturgico": colore
+            "antifona_comunione": antifona_comunione,
+            "colore_liturgico": colore,
         }
 
     except Exception as e:
         print("Errore scraping CEI:", e)
         return fallback_liturgia()
-
 
 @app.get("/liturgia-del-giorno")
 async def get_liturgia_del_giorno():
